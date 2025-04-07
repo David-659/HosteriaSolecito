@@ -1,0 +1,120 @@
+body {
+    background-image: url('https://png.pngtree.com/background/20231030/original/pngtree-nature-inspired-3d-render-of-a-tranquil-hotel-interior-picture-image_5796947.jpg');
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.nosotros-main {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #ffd700; /* dorado */
+    text-shadow: 1px 1px 2px black;
+}
+
+.equipo-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: rgba(52, 72, 94, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 1.5rem;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s;
+    border: 1px solid #2d3e50;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    border: 3px solid #ffd700;
+}
+
+.card h2 {
+    color: #ffd700;
+    font-weight: bold;
+}
+
+.card .rol {
+    font-weight: bold;
+    color: #84d4ff;
+    margin-top: -10px;
+}
+
+.card .desc {
+    font-size: 0.95rem;
+    color: #d0d0d0;
+}
+
+.form-section {
+    background-color: rgba(52, 72, 94, 0.7);
+    padding: 2rem;
+    margin-top: 4rem;
+    border-radius: 15px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.5);
+}
+
+.form-section h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #fff;
+    font-size: 1.7rem;
+    text-shadow: 1px 1px 2px black;
+}
+
+form#contactForm input,
+form#contactForm textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: white;
+}
+
+form#contactForm input::placeholder,
+form#contactForm textarea::placeholder {
+    color: #ccc;
+}
+
+form#contactForm button {
+    width: 100%;
+    padding: 0.9rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #ffd700;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+form#contactForm button:hover {
+    background-color: #e6c200;
+}

@@ -1,0 +1,95 @@
+{% extends '-bases.html' %}
+{% load static %}
+{% block tittle %} inicio {% endblock %}
+{% block style %} {% static 'css/menu.css' %} {% endblock %}
+{% block js %} {% static 'js/menu.js' %} {% endblock %}
+{% block cuerpo %}
+
+
+<title>Menú de la Hostería</title>
+<body>
+    <h1 class="oi">Menú de la Hostería</h1>
+    <main>
+        <section class="menu">
+            <div class="categoria">
+                <h2>Entradas</h2>
+                <div class="item">
+                    <img src="{% static 'img/rest/bru.jpeg' %}" alt="Bruschetta">
+                    <div>
+                        <h3>Bruschetta</h3>
+                        <p>Pan crujiente con tomate, albahaca y aceite de oliva.</p>
+                        <span>$12.000</span>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="{% static 'img/rest/cevi.jpeg' %}" alt="Ceviche">
+                    <div>
+                        <h3>Ceviche</h3>
+                        <p>Mariscos frescos marinados en jugo de limón.</p>
+                        <span>$15.000</span>
+                    </div>
+                </div>
+            </div>
+            <div class="categoria">
+                <h2>Platos Principales</h2>
+                <div class="item">
+                    <img src="{% static 'img/rest/parri.jpeg' %}" alt="Lomo a la parrilla">
+                    <div>
+                        <h3>Lomo a la parrilla</h3>
+                        <p>Acompañado de puré de papas y verduras salteadas.</p>
+                        <span>$35.000</span>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="{% static 'img/rest/pasta.jpeg' %}" alt="Pasta Alfredo">
+                    <div>
+                        <h3>Pasta Alfredo</h3>
+                        <p>Pasta en salsa cremosa de queso parmesano.</p>
+                        <span>$28.000</span>
+                    </div>
+                </div>
+            </div>
+            <div class="categoria">
+                <h2>Postres</h2>
+                <div class="item">
+                    <img src="{% static 'img/rest/tira.jpeg' %}" alt="Tiramisú">
+                    <div>
+                        <h3>Tiramisú</h3>
+                        <p>Postre italiano con café y crema de mascarpone.</p>
+                        <span>$18.000</span>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="{% static 'img/rest/flan.jpeg' %}" alt="Flan de caramelo">
+                    <div>
+                        <h3>Flan de caramelo</h3>
+                        <p>Postre suave con salsa de caramelo.</p>
+                        <span>$14.000</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="categoria">
+                <h2>Bebidas</h2>
+                <div class="item">
+                    <img src="{% static 'img/rest/nari.jpeg' %}" alt="Jugo de Naranja">
+                    <div>
+                        <h3>Jugo de Naranja</h3>
+                        <p>Natural y recién exprimido.</p>
+                        <span>$8.000</span>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="{% static 'img/rest/coffe.jpeg' %}" alt="Café Espresso">
+                    <div>
+                        <h3>Café Espresso</h3>
+                        <p>Café fuerte y aromático.</p>
+                        <span>$7.000</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="{% static 'js/menu.js' %}"></script>
+</body>
+{% endblock %}

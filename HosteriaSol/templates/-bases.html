@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/-base.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+
+    <link rel="stylesheet" href="{% block style %}  {% endblock %}" />
+    <title>Hosteria - {% block tittle %} inicio {% endblock %}</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon_io/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon_io/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon_io/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'favicon_io/site.webmanifest' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <a href="https://wa.me/5211234567890?text=Me%20gustaría%20saber%20el%20precio%20del%20coche" class="whatsapp" target="_blank">
+        <i class="fa fa-whatsapp whatsapp-icon"></i>
+    </a>
+    <header class="header">
+        <nav class="navbar">
+            <img src="{% static 'img/fotos/logo.png' %}">
+            <div class="logo">Hostería Solecito</div>
+            <ul class="nav-links">
+                <li><a href="{% url 'index' %}">Inicio</a></li>
+                <li><a href="{% url 'Habitaciones' %}">Habitaciones</a></li>
+                <li><a href="{% url 'Galeria' %}">Galería</a></li>
+                <li><a href="{% url 'Reservas' %}">Reservas</a></li>
+                <li><a href="{% url 'Nosotros' %}">Nosotros</a></li>
+                {% if request.session.auth.rol == "Administrador" %}
+                    <li><a href="{% url 'Administrador' %}">Admin</a></li>
+                {% endif %}
+            </ul>
+            {% if request.session.auth %}
+                <div class="usuario-info">
+                    <p class="bien"><img  class="foto-perfil" src="{{ request.session.auth.foto }}"></p>
+                    <a href="{% url 'editar_registro' request.session.auth.id %}"><strong>Perfil</strong></a><br>              
+                    <a href="{% url 'logout' %}" class="auth-btn">Cerrar Sesión</a>
+                    <a href="{% url 'cambiar_clave' %}" class="auth-btn">Cambiar contraseña</a>
+                </div> 
+            {% else %}
+                <div class="usuario-info">
+                    <a href="{% url 'login' %}"><button class="auth-btn">Login</button></a>
+                    <a href="{% url 'agregar_registro' %}"><button class="auth-btn">Registrar</button></a>
+                    <p class="bienv">No hay sesión</p>
+                </div>
+            {% endif %} 
+        </nav>
+    </header>
+    {% if messages %}
+        {% for message in messages %}
+                <p class="message {{ message.tags }}">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+    {% block cuerpo %}
+
+    {% endblock %}
+    <footer class="footer">
+        <div class="footer-column">
+            <h2>Hostería Solecito</h2>
+            <p>Un lugar para descansar y conectar con la naturaleza.</p>
+            <p class="bold">Tu refugio perfecto.</p>
+        </div>
+        
+        <div class="footer-column">
+            <h3>Explora</h3>
+            <a href="{% url 'index' %}">Inicio</a>
+            <a href="{% url 'Habitaciones' %}">Habitaciones</a>
+            <a href="{% url 'Galeria' %}">Galería</a>
+            <a href="{% url 'Reservas' %}">Reservas</a>
+            <a href="{% url 'Nosotros' %}">Nosotros</a>
+        </div>
+        
+        <div class="footer-column">
+            <h3>Ubicación</h3>
+            <p>Hostería El Solecito</p>
+            <p>Km 12 Vía Rionegro - La Ceja</p>
+            <p>Antioquia, Colombia</p>
+            <h3>Contactanos</h3>
+            <p>hosteriaelsolecito@gmail.com</p>
+            <p>+57 301 234 5678</p>
+        </div>
+    
+        <div class="social-icons">
+            <img src="https://img.icons8.com/?size=50&id=59780&format=png&color=ffffff" alt="Instagram">
+            <img src="https://img.icons8.com/?size=50&id=59813&format=png&color=ffffff" alt="Facebook">
+            <img src="https://img.icons8.com/?size=48&id=phOKFKYpe00C&format=png&color=ffffff" alt="TikTok">
+            <img src="https://img.icons8.com/?size=50&id=62855&format=png&color=ffffff" alt="WhatsApp">
+        </div>
+        
+        <div class="footer-column">
+            <h3>Legal</h3>
+            <a href="{% url 'terminos' %}">Términos y condiciones</a>
+        </div>
+    </footer>
+    <script src="{% block js %}  {% endblock %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+</html>

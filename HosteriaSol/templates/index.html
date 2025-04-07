@@ -1,0 +1,188 @@
+{% extends '-bases.html' %}
+{% load static %}
+{% block tittle %} inicio {% endblock %}
+{% block style %} {% static 'css/index.css' %} {% endblock %}
+{% block js %} {% static 'js/index.js' %} {% endblock %}
+{% block cuerpo %}
+    <div class="content"> 
+        <div class="overlay" id="hero">
+            <div class="hero-content">
+                <br>
+                <br>
+                <br>
+                <br>
+                <h1 class="excu">LA EXCLUSIVA HOSTERIA EN LAS AFUERAS DE MEDELLIN</h1>
+            </div>
+        </div> 
+    </div>
+    <br><br><br><br><br><br><br><br><br><br>
+    <Center><div class="container1">
+        <div class="image-section">
+            <div class="contenedor">
+                <div id="carouselExampleAutoplaying" class="carousel slide contenedor" data-bs-ride="carousel">
+                    <div class="carousel-inner "  style="width :600px;height :400px;">
+                        <div class="carousel-item active">
+                            <img src="https://images.mirai.com/INFOROOMS/100122961/dmkkkLgZG7zEJ5wQ1cls/dmkkkLgZG7zEJ5wQ1cls_original.jpg" class="d-block w-100 image-sl" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://www.xotels.com/wp-content/uploads/2022/07/Executive-Room-XOTELS.webp" class="d-block w-100 image-sl" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://www.hotelbenidorm.co/assets/cache/uploads//habitaciones/751x501/suite-hotel-1686067424.webp?from=jpg" class="d-block w-100 image-sl" alt="...">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+            </div>
+            <div class="rooms-badge">
+                +20
+                <span>
+                    Habitaciones y mas
+                </span>
+            </div>
+        </div>
+        <div class="text-section">
+            <div class="welcome">
+                Bienvenido al solecito
+            </div>
+            <h1>
+                Relájate en nuestro hotel
+            </h1>
+            <p>
+                Un refugio de lo común, de la vida diaria. El poder gozar de cada día, el poder disfrutar de
+                la cotidianidad, de nuestro quehacer diario y llevarlo al siguiente nivel para entender que la felicidad
+                no es un fin, sino un medio. Allí está el secreto en nuestro
+                <em>
+                    hospedaje en las afueras de medellin.
+                </em>
+            </p>
+            <br>
+        </div>
+    </div>
+    <br><br><br><br><br>
+    <div class="fu">
+
+        <section class="service-section">
+            <div class="bg-texture"></div>
+            <div class="service-content">
+                <h2 class="servi-ce-title">Restaurante</h2>
+                <p class="service-description">Disfrute de nuestra cocina preparada con ingredientes locales y frescos, seleccionados cuidadosamente para ofrecerle una experiencia gastronómica única.</p>
+                <p class="service-description">Nuestro chef ejecutivo ha creado un menú que combina lo mejor de la cocina regional con técnicas contemporáneas, resaltando los sabores auténticos en cada plato.</p>
+                <p class="service-description">Desde el desayuno hasta la cena, cada servicio es una oportunidad para deleitar sus sentidos en un ambiente relajado y con vista al mar.</p>
+                <a class="sol-button" href="{% url 'menu' %}" >Ver menú</a>
+            </div>
+            <div class="service-image rounded mx-auto d-block">
+                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{% static 'img/rest/bru.jpeg' %}" width="500px" height="400px" >
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'img/rest/cevi.jpeg' %}" width="500px" height="400px" >
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'img/rest/pasta.jpeg' %}" width="500px" height="400px" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <section class="service-section">
+            <div class="bg-texture"></div>
+            <div class="service-content">
+                <h2 class="service-title">Circuito de Spa</h2>
+                <p class="service-description">Adéntrese en un mundo de bienestar y relajación, donde podrá disfrutar de nuestro circuito de spa en medio de la naturaleza.</p>
+                <p class="service-description">Nuestras instalaciones cuentan con saunas, jacuzzis, piscinas termales y espacios de meditación. Nuestros terapeutas expertos le guiarán a través de tratamientos que combinan técnicas ancestrales con las más modernas prácticas de relajación y bienestar.</p>
+            </div>
+            <div class="service-image rounded mx-auto d-block">
+                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{% static 'img/spa/spa.jpg' %}" width="500px" height="400px" >
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'img/spa/spaci.jpg' %}" width="500px" height="400px" >
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'img/spa/jacu.webp' %}" width="500px" height="400px" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <section class="service-section">
+            <div class="bg-texture"></div>
+            <div class="service-content">
+                <h2 class="service-title">Actividades</h2>
+                <p class="service-description">Disfrute de una experiencia de viaje sin preocupaciones con nuestro servicio de transporte privado, disponible para todos nuestros huéspedes.</p>
+                <p class="service-description">Nuestros conductores expertos conocen a la perfección las rutas y destinos más interesantes de la región, y estarán encantados de compartir sus conocimientos con usted.</p>
+                <p class="service-description">Desde el aeropuerto hasta el hotel, o para explorar los alrededores, nuestro servicio de transporte le garantiza comodidad, seguridad y puntualidad en todo momento.</p>
+            </div>
+            <div class="service-image rounded mx-auto d-block">
+                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{% static 'img/activ/1aire.webp' %}" width="500px" height="400px" >
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'img/activ/caballo.jpg' %}" width="500px" height="400px" >
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'img/activ/moto.jpg' %}" width="500px" height="400px" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <section class="service-section ">
+            <div class="bg-texture"></div>
+            <div class="service-content">
+                <h2 class="service-title">Eventos Únicos</h2>
+                <p class="service-description">Celebre momentos especiales en un entorno incomparable. Nuestros espacios versátiles son perfectos para bodas, reuniones corporativas o fiestas privACTIVIDADESadas.</p>
+                <p class="service-description">Nuestro equipo de planificación de eventos se encargará de todos los detalles, para que pueda relajarse y disfrutar de la celebración.</p>
+                <p class="service-description">Desde la decoración hasta el menú, personalizamos cada aspecto para crear una experiencia inolvidable acorde con sus preferencias.</p>
+                <a href="#" class="sol-button">Más información</a>
+            </div>
+            <div class="service-image rounded mx-auto d-block">
+                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{% static 'img/eventos/bufet.jpg' %}" width="500px" height="400px" >
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'img/eventos/halowin.jpg' %}" width="500px" height="400px" >
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'img/eventos/hapi.jpg' %}" width="500px" height="400px" >
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'img/eventos/serenata.webp' %}" width="500px" height="400px" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <section class="service-section">
+            <div class="bg-texture"></div>
+            <div class="service-content">
+                <h2 class="service-title">Experiencias en playa</h2>
+                <p class="service-description">Nuestra ubicación en la espectacular playa ofrece infinitas posibilidades para disfrutar de momentos inolvidables, desde románticas cenas a la orilla del mar hasta actividades acuáticas.</p>
+                <p class="service-description">Nuestro personal está siempre dispuesto a crear experiencias personalizadas que se adapten a sus preferencias y necesidades, convirtiendo cada momento en un recuerdo especial.</p>
+            </div>
+            <div class="service-image rounded mx-auto d-block">
+                <iframe src="https://www.youtube.com/embed/VtgM7ksv-j0" width="500px" height="400px" allowfullscreen></iframe>
+            </div>
+        </section>
+    </div>  
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends '-bases.html' %}
+{% load static %}
+{% block tittle %} Administrador {% endblock %}
+{% block style %} {% static 'css/admin.css' %} {% endblock %}
+{% block js %} {% static 'js/admin.js' %} {% endblock %}
+{% block cuerpo %}  
+<div class="container">
+    <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Tablas
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Reservas</a></li>
+            <li><a class="dropdown-item" href="{% url 'listar_habitaciones' %}">Habitaciones</a></li>
+            <li><a class="dropdown-item" href="{% url 'listar_clientes' %}">Usuarios</a></li>
+        </ul>
+    </div>
+    <h2>Administración de Reservas</h2>
+    <h3>Reservas</h3>
+    <div class="table-container" >
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Empleado</th>
+                    <th>Días</th>
+                    <th>Costo</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody id="reservasTable">
+                {% if data %}
+                {% for reserva in data %}
+                <tr>
+                    <td>{{ reserva.cliente.nombre }}</td>
+                    <td>{{ reserva.empleado.nombre }}</td>
+                    <td>Desde {{ reserva.fecha_inicio }} Hasta {{ reserva.fecha_fin }}</td>
+                    <td>{{ reserva.pago.monto_total }}</td>
+                    
+                    <td>
+                        <a class="btn" href="javascript:confirmar_eliminar(`{% url 'eliminar_reserva' reserva.id %}`);">Eliminar</a>
+                        <a class="btn" href="{% url 'editar_reserva' reserva.id %}">Editar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                    <p>No hay reservas aún...</p>
+                {% endif %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+   
+<script src="{% static 'js/admin.js' %}"></script>
+{% endblock %}

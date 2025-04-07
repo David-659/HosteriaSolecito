@@ -1,0 +1,22 @@
+{% extends '-bases.html' %}
+{% load static %}
+{% block tittle %} cambiar_clave {% endblock %}
+{% block style %} {% static 'css/Login.css' %} {% endblock %}
+{% block cuerpo %}
+        <form action="" method="post" >
+            {% csrf_token %}
+            <div class="login-container">
+                <h2>Cambiar contraseña</h2>
+                <div class="input-group">
+                    <input name="clave_actual" type="password" placeholder="Contraseña actual" class="form-control mb-4"><br>
+                </div>
+                <div class="input-group">
+                    <input name="nueva" type="password" placeholder="Contraseña nueva" class="form-control mb-1"><br>
+                </div>
+                <div class="input-group">
+                    <input name="repite_nueva" type="password" placeholder="Repita contraseña" class="form-control mb-1"><br>
+                </div>
+                <button type="submit" c class="btn-login">Guardar</button>
+            </div>
+        </form>
+{% endblock %}

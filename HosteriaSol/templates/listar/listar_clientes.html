@@ -1,0 +1,68 @@
+{% extends '-bases.html' %}
+{% load static %}
+{% block tittle %} Administrador {% endblock %}
+{% block style %} {% static 'css/admin.css' %} {% endblock %}
+{% block js %} {% static 'js/admin.js' %} {% endblock %}
+
+{% block cuerpo %}  
+<div class="container">
+    <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Tablas
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'Administrador' %}">Reservas</a></li>
+            <li><a class="dropdown-item" href="{% url 'listar_habitaciones' %}">Habitaciones</a></li>
+            <li><a class="dropdown-item" href="{% url 'listar_clientes' %}">Usuarios</a></li>
+        </ul>
+    </div>
+
+    <h3>Clientes</h3>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>nombre</th>
+                    <th>correo</th>
+                    <th>tipo_documento</th>
+                    <th>documento</th>
+                    <th>foto</th>
+                    <th>telefono</th>
+                    <th>direccion</th>
+                    <th>rol</th>
+                    <th>accion</th>
+                </tr>
+            </thead>
+            <tbody id="reservasTable">
+                {% if data %}
+                    {% for i in data %}
+                    <tr>
+                        <td>{{ i.id }}</td>
+                        <td>{{ i.nombre }}</td>
+                        <td>{{ i.correo }}</td>
+                        <td>{{ i.get_tipo_documento_display }}</td>
+                        <td>{{ i.documento }}</td>
+                        <td><img src="{{ i.foto.url }}" class="fotico"></td>
+                        <td>{{ i.telefono }}</td>
+                        <td>{{ i.direccion }}</td>
+                        <td>{{ i.get_rol_display }}</td>
+                        <td>
+                            <a class="btn" href="javascript:confirmar_eliminar(`{% url 'eliminar_usuario' i.id %}`);">Eliminar</a>
+                            <a class="btn" href="{% url 'editar_registro' i.id %}">Editar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="10" style="text-align: center;">No hay usuarios aún...</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="{% static 'js/admin.js' %}"></script>
+{% endblock %}

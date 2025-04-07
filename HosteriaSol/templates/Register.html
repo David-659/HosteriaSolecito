@@ -1,0 +1,75 @@
+{% extends '-bases.html' %}
+{% load static %}
+{% block tittle %} Registro {% endblock %}
+{% block style %} {% static 'css/Register.css' %} {% endblock %}
+{% block js %} {% static 'js/Register.js' %} {% endblock %}
+{% block cuerpo %}
+    <div class="register-container">
+        {% if datos %}
+            <h2>Editar Usuario {{ datos.nombre }}</h2>
+        {% else %}
+            <h2>Agregar Usuario</h2>
+        {% endif %}
+        <form class="register-form" method="post" action="{% if datos %}{% url 'editar_registro' request.session.auth.id %}{% else %}{% url 'agregar_registro' %}{% endif %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="input-group">
+                <label >Nombre de usuario</label>
+                <input value="{{datos.nombre}}" name="nombre" type="text" id="username" placeholder="Introduce tu nombre de usuario" required>
+            </div>
+            <div class="input-group">
+                <label>Correo electrónico</label>
+                <input value="{{datos.correo}}" name="correo" type="email" id="email" placeholder="Introduce tu correo electrónico" required>
+            </div>
+            <div class="input-group">
+                <label >Tipo documento: </label>
+                <select name="tipo_documento">
+                    <option value="">Seleccione</option>
+                    <option value="1" {% if datos.tipo_documento == 1 %}selected=""{% endif %}>Cedula de Ciudadania</option>
+                    <option value="2"  {% if datos.tipo_documento == 2 %}selected=""{% endif %}>Tarjeta de Identidad</option>
+                    <option value="3"  {% if datos.tipo_documento == 3 %}selected=""{% endif %}>Cedula de Extranjeria</option>
+                    <option value="4"  {% if datos.tipo_documento == 4 %}selected=""{% endif %}>Pasaporte</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label >Documento</label>
+                <input value="{{datos.documento}}" name="documento" type="number" placeholder="Introduce tu Documento" required>
+            </div>
+            <div class="input-group">
+                <label >Telefono: </label>
+                <input value="{{datos.telefono}}" name="telefono" type="number" placeholder="Introduce tu numero de telefono" required>
+            </div>
+            <div class="input-group">
+                <label >Direccion: </label>
+                <input value="{{datos.direccion}}" name="direccion" type="text" placeholder="Introduce tu Dirección" required>
+            </div>
+            <div class="input-group">
+                <label>Foto de Perfil:</label><br>
+                {% if datos %}
+                    <br><img src="{{ datos.foto.url }}" alt="Foto de perfil" width="120px" height="120px" style="border-radius: 10px; display: block; margin-bottom: 10px;">
+                {% endif %}
+                <input type="file" name="foto" accept="image/*">
+            </div>
+            {% if datos %}
+                
+            {% else %}
+            <div class="input-group">
+                <label>Contraseña</label>
+                <input value="{{datos.password}}" name="password" type="password" id="password" placeholder="Introduce tu contraseña" required>
+            </div>
+            <div class="input-group">
+                <label>Confirma Contraseña</label>
+                <input value="{{datos.password}}" type="password" name="confirm_password" id="confirm_password" placeholder="Confirma tu contraseña" required>
+            </div>
+            <div class="terminos">
+                <input {% if datos %}selected=""{% endif %} type="checkbox" name="terminos" required>
+                Acepto los <a href="{% url 'terminos' %}" target="_blank">términos y condiciones</a>
+            </div>
+            {% endif %}
+            <br>
+            <button type="submit" class="btn-register">{% if datos %}Actualizar{% else %}Registrarse{% endif %}</button>
+        </form>
+        <div class="login-link">
+            <p>¿Ya tienes cuenta?<a href="{% url 'login' %}">Inicia sesión aquí</a></p>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,145 @@
+{% extends '-bases.html' %}
+{% load static %}
+{% block tittle %} Habitaciones {% endblock %}
+{% block style %} {% static 'css/Habitaciones.css' %} {% endblock %}
+{% block cuerpo %}
+<body>
+  
+  <div class="room-container">
+    <div class="room-section">
+      <div class="room-info">
+        <h1>Grand Suite</h1>
+        <p>Nuestra habitación más lujosa con vistas panorámicas, baño privado con jacuzzi y una amplia zona de estar. Perfecta para una experiencia inolvidable.</p>
+        <br>
+        <br>
+        <div class="room-amenities">
+          <div class="amenity">
+            <span>👥 4 Personas</span>
+          </div>
+          <div class="amenity">
+            <span>🛏️ 2 Cama King</span>
+          </div>
+          <div class="amenity">
+            <span>📐 200m²</span>
+          </div>
+          <div class="amenity">
+            <span>🛁 Jacuzzi</span>
+          </div>
+          <div class="amenity">
+            <span>🚿 2 Ducha cada uno</span>
+          </div>
+          <div class="amenity">
+            <span>🌐 Wifi Gratis</span>
+          </div>
+        </div>
+        <br>
+        <br>
+        <a href="{% url 'Reservas' %}" class="reserve-button">Reservar Ahora</a>
+      </div>
+      <img src=" {% static 'img/fotos/habitacion2.webp' %}" alt="Grand Suite" style="width :600px;height :400px;">
+    </div>
+    <div class="room-section">
+      <div class="room-info">
+        <h1>Twin Superior</h1>
+        <p>Espaciosa habitación con dos camas individuales, perfecta para amigos o colegas. Incluye zona de trabajo y baño completo.</p>
+        <div class="room-amenities">
+          <div class="amenity">
+            <span>👥 4 Personas</span>
+          </div>
+          <div class="amenity">
+            <span>🛏️ 2 Cama King</span>
+          </div>
+          <div class="amenity">
+            <span>📐 38m²</span>
+          </div>
+          <div class="amenity">
+            <span>🚿 1 Ducha</span>
+          </div>
+          <div class="amenity">
+            <span>🌐 Wifi Gratis</span>
+          </div>
+        </div>
+        <a href="{% url 'Reservas' %}" class="reserve-button">Reservar Ahora</a>
+      </div>
+      <img src=" {% static 'img/fotos/habitacion1.webp' %}" alt="Twin Superior" style="width :600px;height :400px;">
+    </div>
+    
+    <div class="room-section">
+      <div class="room-info">
+        <h1>Twin</h1>
+        <p>Habitación confortable con dos camas individuales, perfecta para una estancia práctica y económica con todas las comodidades esenciales.</p>
+        <div class="room-amenities">
+          <div class="amenity">
+            <span>👥 2 Personas</span>
+          </div>
+          <div class="amenity">
+            <span>🛏️ 1 Cama King</span>
+          </div>
+          <div class="amenity">
+            <span>📐 43m²</span>
+          </div>
+          <div class="amenity">
+            <span>🚿 1 Ducha</span>
+          </div>
+          <div class="amenity">
+            <span>🌐 Wifi Gratis</span>
+          </div>
+        </div>
+        <a href="{% url 'Reservas' %}" class="reserve-button">Reservar Ahora</a>
+      </div>
+      <img src=" {% static 'img/fotos/habitacion3.webp' %}" alt="Twin" style="width :600px;height :400px;">
+    </div>
+    
+    <div class="room-section">
+      <div class="room-info">
+        <h1>Deluxe Superior</h1>
+        <p>Elegante habitación con una cama king-size, decoración de lujo y vistas privilegiadas. Incluye detalles premium y amenities exclusivos.</p>
+        <div class="room-amenities">
+          <div class="amenity">
+            <span>👥 2 Personas</span>
+          </div>
+          <div class="amenity">
+            <span>🛏️ 1 Cama King</span>
+          </div>
+          <div class="amenity">
+            <span>📐 43m²</span>
+          </div>
+          <div class="amenity">
+            <span>🚿 1 Ducha</span>
+          </div>
+          <div class="amenity">
+            <span>🌐 Wifi Gratis</span>
+          </div>
+        </div>
+        <a href="{% url 'Reservas' %}" class="reserve-button">Reservar Ahora</a>
+      </div>
+      <img src=" {% static 'img/fotos/habitacion4.webp' %}" alt="Deluxe Superior" style="width :600px;height :400px;">
+    </div>
+    
+    <div class="room-section">
+      <div class="room-info">
+        <h1>Deluxe</h1>
+        <p>Habitación moderna y elegante con una cama queen-size, decorada con un estilo contemporáneo y equipada con todas las comodidades.</p>
+        <div class="room-amenities">      
+          <div class="amenity">
+            <span>👥 2 Personas</span>
+          </div>
+          <div class="amenity">
+            <span>🛏️ 1 Cama Queen</span>
+          </div>
+          <div class="amenity">
+            <span>📐 24-32m²</span>
+          </div>
+          <div class="amenity">
+            <span>🚿 1 Ducha</span>
+          </div>
+          <div class="amenity">
+            <span>🌐 Wifi Gratis</span>
+          </div>
+        </div>
+        <a href="{% url 'Reservas' %}" class="reserve-button">Reservar Ahora</a>
+      </div>
+      <img src=" {% static 'img/fotos/habitacion5.webp' %}" alt="Deluxe Superior" style="width :600px;height :400px;">
+    </div>
+  </div>
+{% endblock %}

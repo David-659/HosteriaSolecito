@@ -1,0 +1,43 @@
+{% extends '-bases.html' %}
+{% load static %}
+{% block tittle %}Nosotros{% endblock %}
+{% block style %} {% static 'css/nosotros.css' %} {% endblock %}
+{% block js %} {% static 'js/nosotros.js' %} {% endblock %}
+
+{% block cuerpo %}
+<main class="nosotros-main">
+    <h1 class="title">Conoce a Nuestro Equipo</h1>
+    
+    <section class="equipo-container">
+        <div class="card">
+            <img src="{% static 'img/Noso/Juan.jpeg' %}" alt="Juan Carvajal">
+            <h2>Juan Carvajal</h2>
+            <p class="rol">Desarrollador Backend</p>
+            <p class="desc">Especialista en el lado del servidor, conectando datos y APIs para un funcionamiento perfecto.</p>
+        </div>
+        <div class="card">
+            <img src="{% static 'img/Noso/Sofia.jpeg' %}" alt="Sofia Isaza">
+            <h2>Sofia Isaza</h2>
+            <p class="rol">Desarrolladora Frontend</p>
+            <p class="desc">Crea interfaces limpias y funcionales con un enfoque en la experiencia del usuario.</p>
+        </div>
+        <div class="card">
+            <img src="{% static 'img/Noso/David.jpeg' %}" alt="David Velásquez">
+            <h2>David Velásquez</h2>
+            <p class="rol">Desarrollador Full Stack</p>
+            <p class="desc">Une lo mejor del backend y frontend para construir soluciones completas.</p>
+        </div>
+    </section>
+
+    <section class="form-section">
+        <h2>¿Tienes alguna duda o comentario?</h2>
+        <form id="contactForm" action="/contactar/" method="POST">
+            {% csrf_token %}
+            <input type="text" name="txtNombre" placeholder="Tu nombre" required>
+            <input type="email" name="txtEmail" placeholder="Tu correo electrónico" required>
+            <textarea name="txtMensaje" placeholder="Escribe tu mensaje aquí..." rows="5" style="resize: none;"></textarea>
+            <button type="submit">Enviar mensaje</button>
+        </form>
+    </section>
+</main>
+{% endblock %}

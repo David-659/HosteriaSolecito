@@ -1,0 +1,92 @@
+{% extends '-bases.html' %}
+{% load static %}
+{% block tittle %} inicio {% endblock %}
+{% block style %} {% static 'css/Reservas.css' %} {% endblock %}
+{% block js %} {% static 'js/Reservas.js' %} {% endblock %}
+{% block cuerpo %}
+<form action="{% if datos %}{% url 'editar_reserva' datos.id %}{% else %}{% url 'agregar_reservas' %}{% endif %}" method="post">
+  {% csrf_token %}
+  {% if tiene_reserva %}
+    <button type="button" class="btn btn-primary position-relative">
+      Reservas
+      <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+        <span class="visually-hidden">New alerts</span>
+      </span>
+    </button>
+  {% else %}
+    <button type="button" class="btn btn-primary">Reservas</button>
+  {% endif %}
+    <div class="container">
+      <h1>Reservar Fechas</h1>
+      <div class="calendar">
+          <div class="month">
+              <button><a class="mu" href="javascript:prevMonth()">&lt;</a></button>
+              <span id="month-label"></span>
+              <button><a class="mu" href="javascript:nextMonth()">&gt;</a></button>
+          </div>
+          <div class="weekdays">
+              <div>Dom</div>
+              <div>Lun</div>
+              <div>Mar</div>
+              <div>Mié</div>
+              <div>Jue</div>
+              <div>Vie</div>
+              <div>Sáb</div>
+          </div>
+          <div class="days"></div>
+      </div>
+
+      <div class="error-message"></div>
+      <div class="success-message"></div>
+
+      <button id="reserve-button" disabled><a class="mu" href="javascript:reserve()">Reservar</a></button>
+        
+        <a href="{% url 'index' %}" class="back-button">Volver al Menú</a>
+    </div><br><br><br><br><br><br>
+  <center>
+    <div id="contenido_oculto">
+          <h3>Detalles de la Reserva</h3>
+          <div class="contenedor-select">
+              <label for="tipo-habitacion">Tipo de Habitación:</label>
+              <select id="tipo-habitacion" name="habitacion">
+                {% for habitacion in disponibles %}
+                  <option value="{{ habitacion.id }}"> {{ habitacion.nombre }}</option>
+                {% endfor %}
+              </select>
+          </div>
+          <div class="cards-container">
+            {% for habitacion in habitaciones %}
+              <div class="card" data-id="{{ habitacion.id }}" style="display: none;">
+                <img src="{{ habitacion.foto.url }}">
+                <div class="info">
+                  <h2>{{ habitacion.nombre }}</h2>
+                  <p>{{ habitacion.descripcion }}</p>
+                  <p>Capacidad: {{ habitacion.capacidad }}</p>
+                  <p class="precio">Precio: ${{ habitacion.precio }}</p>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          <label for="num-per">Número de Personas:</label>
+          <select id="num-per" name="num_per">
+            <option value="1" {% if datos and datos.num_per == 1 %}selected{% endif %}>1</option>
+            <option value="2" {% if datos and datos.num_per == 2 %}selected{% endif %}>2</option>
+            <option value="3" {% if datos and datos.num_per == 3 %}selected{% endif %}>3</option>
+            <option value="4" {% if datos and datos.num_per == 4 %}selected{% endif %}>4</option>
+            <option value="5" {% if datos and datos.num_per == 5 %}selected{% endif %}>5</option>
+            <option value="6" {% if datos and datos.num_per == 6 %}selected{% endif %}>6</option>
+            <option value="Mas" {% if datos and datos.num_per == "Mas" %}selected{% endif %}>Más</option>
+          </select>
+          <br>
+          <input type="hidden" name="cliente" value="{{ request.session.auth.id }}"><br>
+          <input type="hidden" name="empleado" value="">
+          <br><br>
+          <input type="hidden" id="startInput" name="inicio" value="">
+          <input type="hidden" id="endInput" name="fin" value="">
+
+          <button type="submit">{% if datos %}Actualizar{% else %}Guardar{% endif %}</button>
+          <button><a class="mu" href="javascript:closeModal()">Cancelar</a></button>
+    </div>
+  </center>
+</form>   
+{% endblock %}

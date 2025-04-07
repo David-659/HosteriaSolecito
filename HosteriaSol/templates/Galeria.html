@@ -1,0 +1,48 @@
+{% extends '-bases.html' %}
+{% load static %}
+{% block tittle %} Galeria {% endblock %}
+{% block style %} {% static 'css/Galeria.css' %} {% endblock %}
+{% block cuerpo %}
+    <main>
+        <h1 class="gallery-title">Explora Nuestra Galería</h1>
+        <section class="gallery">
+            <a href="{% static 'img/imag/64501219.jpg' %} " target="_blank">
+                <img src="{% static 'img/imag/64501219.jpg' %}" alt="Vista de la Hostería">
+            </a>
+            <a href="{% static 'img/imag/Delux.jpg' %}" target="_blank">
+                <img src="{% static 'img/imag/Delux.jpg' %}" alt="Habitación Deluxe">
+            </a>
+            <a href="{% static 'img/imag/caption.jpg' %}" target="_blank">
+                <img src="{% static 'img/imag/caption.jpg' %}" alt="Piscina al aire libre">
+            </a>
+            <a href="{% static 'img/imag/caption (1).jpg' %}" target="_blank">
+                <img src="{% static 'img/imag/caption (1).jpg' %}" alt="Área de descanso">
+            </a>
+            <a href="{% static 'img/imag/hosteria-florida-tropical.jpg' %}" target="_blank">
+                <img src="{% static 'img/imag/hosteria-florida-tropical.jpg' %}"  alt="Comedor con vista">
+            </a>
+            <a href="{% static 'img/imag/el-paraiso.jpg' %}" target="_blank">
+                <img src="{% static 'img/imag/el-paraiso.jpg' %}" alt="Jardines">
+            </a>
+            <a href="{% static 'img/imag/IMG_4580.avif' %}" target="_blank">
+                <img src="{% static 'img/imag/IMG_4580.avif' %}" alt="juegos">
+            </a>
+            <a href="{% static 'img/imag/restaurante.avif' %}" target="_blank">
+                <img src="{% static 'img/imag/restaurante.avif' %}" alt="juegos">
+            </a>
+            <a href="{% static 'img/imag/jiji.jpg' %}" target="_blank">
+                <img src="{% static 'img/imag/jiji.jpg' %}" alt="juegos">
+            </a>
+            <a href="{% static 'img/imag/sala.avif' %}" target="_blank">
+                <img src="{% static 'img/imag/sala.avif' %}" alt="juegos">
+            </a>
+            <a href="{% static 'img/imag/juegos.jpg' %}" target="_blank">
+                <img src="{% static 'img/imag/juegos.jpg' %}" alt="juegos">
+            </a>
+            <a href="{% static 'img/imag/natu.jpg' %}" target="_blank">
+                <img src="{% static 'img/imag/natu.jpg' %}" alt="juegos">
+            </a>
+        </section>
+    </main>
+    
+{% endblock %} 

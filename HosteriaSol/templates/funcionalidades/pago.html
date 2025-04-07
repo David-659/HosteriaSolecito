@@ -1,0 +1,39 @@
+{% extends '-bases.html' %}
+{% load static %}
+{% block tittle %} inicio {% endblock %}
+{% block style %} {% static 'css/Register.css' %} {% endblock %}
+{% block js %} {% static 'js/pago.js' %} {% endblock %}
+{% block cuerpo %}
+<body>
+    <form  action="{% url 'pago' reserva.id %}" method="post" class="register-form">
+        {% csrf_token %}
+        <div class="register-container">
+            <h2>Registrar Pago</h2>
+            <div class="input-group">
+                <label for="monto_total">Monto Total:</label>
+                <input type="number" name="monto_total" id="monto_total" placeholder="Introduce tu monto a pagar" required>
+            </div>
+            <br>
+            <div class="input-group">
+                <label>Fecha y Hora Cita:</label>
+                <input value="{{datos.fecha_cita|date:'Y-m-d H:s'}}" type="datetime-local" name="fecha_pago" placeholder="Introduce la fecha y hora"/>
+            </div>
+            <br>
+            <div class="input-group">
+                <label>Método de Pago:</label>
+                <select name="metodo_pago" id="metodo_pago" >
+                    <option value="">Seleccione</option>
+                    <option value="EFECTIVO">Efectivo</option>
+                    <option value="TRANSFERENCIA">Transferencia</option>
+                    <option value="DATAFONO">Datáfono</option>
+                    
+                </select>
+            </div>
+            <br>
+            
+            <button type="submit"  onclick="ponerFechaHora()" class="btn-register">Registrar Pago </button>
+        </div>
+    </form>
+</body>
+       
+{% endblock %}

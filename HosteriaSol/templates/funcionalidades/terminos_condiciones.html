@@ -1,0 +1,60 @@
+{% extends '-bases.html' %}
+{% load static %}
+{% block tittle %} inicio {% endblock %}
+{% block style %} {% static 'css/-base.css' %} {% endblock %}
+{% block cuerpo %}
+    <center>
+    <div id="termsModal" class="modalt">
+        <div class="modalt-content">
+            <button class="close-btn">✖</button>
+            <h2>Términos y Condiciones</h2>
+            <p>Bienvenido a <strong>Hostería El Solecito</strong>. Al utilizar nuestros servicios, aceptas los siguientes términos:</p>
+
+            <h3>1. Reservas y Pagos</h3>
+            <ul>
+                <li>Las reservas están sujetas a disponibilidad y confirmación.</li>
+                <li>Se requiere un <strong>pago anticipado del 50%</strong> del valor total de la estadía.</li>
+                <li>El saldo restante debe ser cancelado al momento del check-in.</li>
+                <li>Aceptamos pagos en efectivo, transferencia bancaria y tarjetas de crédito/débito.</li>
+            </ul>
+
+            <h3>2. Políticas de Cancelación y Reembolso</h3>
+            <ul>
+                <li>Las cancelaciones deben realizarse con al menos <strong>48 horas de anticipación</strong> para obtener un reembolso.</li>
+                <li>Si la cancelación es tardía, se aplicará una penalización del <strong>50% del monto abonado</strong>.</li>
+                <li>No hay reembolsos por <strong>no presentarse (no-show)</strong> sin previo aviso.</li>
+            </ul>
+
+            <h3>3. Normas de Convivencia</h3>
+            <ul>
+                <li><strong>Check-in:</strong> Desde las 2:00 PM.</li>
+                <li><strong>Check-out:</strong> Hasta las 12:00 PM.</li>
+                <li>El consumo de <strong>alcohol y tabaco</strong> solo está permitido en áreas designadas.</li>
+                <li>No se permite el ingreso de mascotas a las habitaciones (excepto asistencia certificada).</li>
+                <li>Se debe mantener un nivel de ruido moderado, especialmente después de las <strong>10:00 PM</strong>.</li>
+                <li>La hostería no se hace responsable por objetos de valor extraviados.</li>
+            </ul>
+
+            <h3>4. Uso de Instalaciones y Servicios</h3>
+            <ul>
+                <li>Los huéspedes pueden hacer uso de la piscina, jardines y restaurante dentro de los horarios establecidos.</li>
+                <li>El uso de la piscina es bajo <strong>responsabilidad del huésped</strong>, y los menores deben estar supervisados.</li>
+                <li>Cualquier daño a la propiedad deberá ser cubierto por el huésped responsable.</li>
+            </ul>
+
+            <h3>5. Seguridad y Responsabilidad</h3>
+            <ul>
+                <li>La hostería cuenta con personal de seguridad, pero no se hace responsable por pérdidas de objetos personales.</li>
+                <li>En caso de emergencia médica, nuestro equipo está capacitado para brindar asistencia y contactar servicios de salud.</li>
+            </ul>
+
+            <h3>6. Contacto y Atención al Cliente</h3>
+            <p>Si tienes dudas o requerimientos especiales, contáctanos:</p>
+            <p><strong>📧 Correo:</strong> hosteriaelsolecito@gmail.com</p>
+            <p><strong>📞 Teléfono:</strong> +57 123 456 7890</p>
+            <p><strong>📍 Ubicación:</strong> Calle 123, Ciudad, País</p>
+
+            <p class="copyright">&copy; 2025 Hostería El Solecito. Todos los derechos reservados.</p>
+        </div>
+    </div>
+{% endblock %}

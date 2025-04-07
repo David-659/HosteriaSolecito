@@ -1,0 +1,19 @@
+{% extends '-bases.html' %}
+{% load static %}
+{% block tittle %} cambiar_clave {% endblock %}
+{% block style %} {% static 'css/Login.css' %} {% endblock %}
+{% block cuerpo %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="login-container">
+            <h2>Recuperar Contraseña</h2>
+            <div class="login-container">
+                <div class="input-group">
+                <label >Ingresa tu correo electrónico:</label>
+                <input type="email" name="email" required>
+                </div>
+                <button  class="btn-login" type="submit">Enviar</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
