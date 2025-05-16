@@ -13,6 +13,7 @@ from decimal import Decimal
 from django.core.mail import send_mail
 from django.conf import settings
 import random
+import time
 import string
 import re
 from .utils import verify_password, hash_password
@@ -187,6 +188,7 @@ def administrador(request):
                     reserva.habitaciones = habitaciones_lista
                     reserva.num_p = reserva.adultos + reserva.ninos 
                     reserva.nombres_habitaciones = ", ".join(nombres_habitaciones) if nombres_habitaciones else "Sin habitaciones"
+
                     
                     
             except Exception as e:
@@ -1195,6 +1197,7 @@ def agregar_servicio(request):
             if foto:
                 o.foto = foto
             o.save()
+            request.session["data"] = None
             messages.success(request, "Servicio agregado correctamente.")
             return redirect("listar_servicios")
         except Exception as e:
@@ -1755,6 +1758,7 @@ def detalles(request,reserva_id,id_habitacion = None,servicio_id= None):
         detalle_reserva.save()
     
     return redirect("index")
+    
 def agregar_usuario(request):
     if request.method == "POST":
         request.session["data"] = request.POST

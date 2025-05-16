@@ -16,17 +16,17 @@
         
         <div class="col-md-6">
             <label class="form-label">Nombre:</label>
-            <input type="text" name="nombre" class="form-control" value="{{ datos.nombre|default_if_none:'' }}" required>
+            <input type="text" name="nombre" class="form-control" value="{% if datos %}{{datos.nombre}}{% else %}{{ request.session.data.nombre }}{% endif %}" required>
         </div>
 
         <div class="col-md-6">
             <label class="form-label">Apellido:</label>
-            <input type="text" name="apellido" class="form-control" value="{{ datos.apellido|default_if_none:'' }}" required>
+            <input type="text" name="apellido" class="form-control" value="{% if datos %}{{datos.apellido}}{% else %}{{ request.session.data.apellido }}{% endif %}" required>
         </div>
 
         <div class="col-md-8">
             <label class="form-label">Correo:</label>
-            <input type="email" name="correo" class="form-control" value="{{ datos.correo|default_if_none:'' }}" required>
+            <input type="email" name="correo" class="form-control" value="{% if datos %}{{datos.correo}}{% else %}{{ request.session.data.correo }}{% endif %}" required>
         </div>
 
         <div class="col-md-8">
@@ -34,7 +34,7 @@
             {% if datos.foto %}
                 <br><img src="{{ datos.foto.url }}" alt="Foto del empleado" width="120px" height="120px" style="border-radius: 10px; display: block; margin-bottom: 10px;">
             {% endif %}
-            <input type="file" class="form-control" name="foto" accept="image/*">
+            <input type="file" class="form-control" name="foto" accept="image/*" >
         </div>
 
         <div class="col-md-6">

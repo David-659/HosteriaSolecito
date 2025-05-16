@@ -1,0 +1,158 @@
+.nosotros-main {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.equipo {
+    color: #f5f5f5;
+    text-shadow: 0 0 15px #090a0a, 0 0 15px #B8860B;
+    font-weight: bold;
+    font-size: 3rem;
+    text-align: center;
+    font-family: 'Playfair Display', Georgia, serif;
+    margin-bottom: 60px;
+}
+
+.equipo-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: rgba(52, 72, 94, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 1.5rem;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s;
+    border: 1px solid #2d3e50;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    border: 3px solid #B8860B;
+}
+
+.card h2 {
+    color: #B8860B;
+    font-weight: bold;
+}
+
+.card .rol {
+    font-weight: bold;
+    color: #84d4ff;
+    margin-top: -10px;
+}
+
+.card .desc {
+    font-size: 0.95rem;
+    color: #d0d0d0;
+}
+
+.form-section {
+    background-color: rgba(52, 72, 94, 0.7);
+    padding: 2rem;
+    margin-top: 4rem;
+    border-radius: 15px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.5);
+}
+
+.form-section h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #fff;
+    font-size: 1.7rem;
+    text-shadow: 1px 1px 2px black;
+}
+
+form#contactForm input,
+form#contactForm textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: white;
+}
+
+form#contactForm input::placeholder,
+form#contactForm textarea::placeholder {
+    color: #ccc;
+}
+
+form#contactForm button {
+    width: 100%;
+    padding: 0.9rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #B8860B;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+form#contactForm button:hover {
+    background-color: #B8860B;
+}
+
+/* -------------------- Responsive -------------------- */
+
+@media (max-width: 768px) {
+    .equipo {
+        font-size: 2.2rem;
+        margin-bottom: 40px;
+    }
+
+    .card {
+        width: 90%;
+        padding: 1.2rem;
+    }
+
+    .form-section {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .equipo {
+        font-size: 1.8rem;
+    }
+
+    .card img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .form-section h2 {
+        font-size: 1.4rem;
+    }
+
+    form#contactForm input,
+    form#contactForm textarea {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+    }
+
+    form#contactForm button {
+        padding: 0.8rem;
+        font-size: 0.95rem;
+    }
+}

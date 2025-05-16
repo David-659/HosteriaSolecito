@@ -1,0 +1,135 @@
+.gallery .row {
+    margin: 0;
+}
+
+.gali{
+    color: #f5f5f5;
+    text-shadow: 0 0 15px #090a0a, 0 0 15px #B8860B;
+    font-weight: bold;
+    font-size: 3rem;
+    text-align: center;
+    font-family: 'Playfair Display', Georgia, serif;
+    margin-bottom: 60px;
+} 
+
+.galeria-thumb {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    background-color: white;
+    padding: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.galeria-thumb:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content {
+    background-color: #000 !important;
+    border-radius: 0;
+    border: none;
+}
+
+.carousel-item img {
+    height: 80vh;
+    object-fit: contain;
+    background-color: #000;
+}
+
+/* Estilos responsivos para dispositivos grandes (hasta 1200px) */
+@media (max-width: 1200px) {
+    .gali {
+        font-size: 2.8rem;
+        margin-bottom: 50px;
+    }
+    
+    .carousel-item img {
+        height: 75vh;
+    }
+}
+
+/* Estilos responsivos para tablets (hasta 992px) */
+@media (max-width: 992px) {
+    .gali {
+        font-size: 2.5rem;
+        margin-bottom: 40px;
+    }
+    
+    .galeria-thumb {
+        height: 180px;
+    }
+    
+    .carousel-item img {
+        height: 70vh;
+    }
+}
+
+/* Estilos responsivos para tablets pequeñas y móviles grandes (hasta 768px) */
+@media (max-width: 768px) {
+    .gali {
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+    }
+    
+    .galeria-thumb {
+        height: 160px;
+        padding: 4px;
+    }
+    
+    .galeria-thumb:hover {
+        transform: scale(1.02); /* Reducir la escala en móviles */
+    }
+    
+    .carousel-item img {
+        height: 60vh;
+    }
+    
+    /* Ajustar el espaciado de la galería */
+    .gallery .row > div {
+        padding: 8px;
+    }
+}
+
+/* Estilos responsivos para móviles (hasta 576px) */
+@media (max-width: 576px) {
+    .gali {
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+        text-shadow: 0 0 10px #090a0a, 0 0 10px #B8860B;
+    }
+    
+    .galeria-thumb {
+        height: 140px;
+        padding: 3px;
+        border-radius: 8px;
+    }
+    
+    .carousel-item img {
+        height: 50vh;
+    }
+    
+    /* Asegurar que las imágenes en dispositivos móviles se muestren correctamente */
+    .gallery .row > div {
+        padding: 5px;
+    }
+}
+
+/* Estilos responsivos para móviles pequeños (hasta 400px) */
+@media (max-width: 400px) {
+    .gali {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+    
+    .galeria-thumb {
+        height: 120px;
+    }
+    
+    .carousel-item img {
+        height: 40vh;
+    }
+}

@@ -1,0 +1,360 @@
+:root {
+    --primary-color: #0d6efd;
+    --accent-color: #B8860B;
+    --bg-light: #f8f9fa;
+    --text-muted: #6c757d;
+}
+
+body {
+    background-color: #f5f5f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.booking-container {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-title {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #eee;
+}
+
+.form-control, .input-group-text {
+    border-radius: 8px;
+    padding: 0.65rem 1rem;
+    border-color: #e0e0e0;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.1);
+}
+
+.form-label {
+    font-weight: 500;
+    color: #555;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+    filter: brightness(1.1);
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.secure-badge {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: #43a047;
+    border-radius: 8px;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    margin-top: 1rem;
+}
+
+.payment-icons {
+    margin-bottom: 1rem;
+}
+
+.payment-icons img {
+    height: 30px;
+    margin-right: 10px;
+    transition: transform 0.2s;
+}
+
+.payment-icons img:hover {
+    transform: scale(1.1);
+}
+
+.booking-summary {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+}
+
+.price-tag {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.text-muted {
+    color: var(--text-muted);
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #eee;
+}
+
+.summary-item:last-child {
+    border-bottom: none;
+}
+
+@media (max-width: 767px) {
+    .booking-container {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .card {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+    }
+
+    .form-control, .input-group-text {
+        padding: 0.5rem 0.8rem;
+    }
+
+    .form-label {
+        font-size: 0.95rem;
+    }
+
+    .btn-primary {
+        padding: 0.6rem 1.2rem;
+    }
+
+    .card-img-top {
+        height: 150px;
+    }
+
+    .secure-badge {
+        font-size: 0.85rem;
+    }
+
+    .payment-icons img {
+        height: 25px;
+    }
+
+    .summary-item {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .booking-container {
+        padding: 1rem;
+    }
+
+    .card {
+        padding: 0.8rem;
+    }
+
+    .card-title {
+        font-size: 1.1rem;
+    }
+
+    .form-control, .input-group-text {
+        padding: 0.4rem 0.7rem;
+    }
+
+    .form-label {
+        font-size: 0.9rem;
+    }
+
+    .btn-primary {
+        padding: 0.5rem 1rem;
+    }
+
+    .card-img-top {
+        height: 120px;
+    }
+
+    .secure-badge {
+        font-size: 0.8rem;
+    }
+
+    .payment-icons img {
+        height: 20px;
+    }
+
+    .summary-item {
+        padding: 0.5rem 0;
+        font-size: 0.9rem;
+    }
+}
+
+.top-bar {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 20px;
+    font-size: 17px;
+}
+
+.register-container {
+    background-color: rgba(0, 0, 0, 0.808);
+    width: 500%;
+    max-width: 700px;
+    margin: 100px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.493);
+    color: white;
+}
+
+.terminos a {
+    color: white;
+}
+
+.terminos {
+    color: white;
+}
+
+.register-container h2 {
+    text-align: center;
+    color: #fff;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.file input[type="file"] {
+    background: #000000c5;
+    color: #fff;
+    padding: 15px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.show-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #ccc;
+}
+
+.btn-register {
+    padding: 12px;
+    background: #B8860B;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.btn-register:hover {
+    background: #a28e4a;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+    color: white;
+}
+
+.login-link a {
+    color: #b9975b;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.auth-btn {
+    padding: 10px 20px;
+    background: #B8860B;
+    border: none;
+    color: #F5F5F5;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.card {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    border: none;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.form-control,
+.form-select {
+    border-radius: 8px;
+    border-color: #ddd;
+    padding: 10px;
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+    border-color: #ddd;
+    color: #555;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 1.1rem;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.me-2 {
+    margin-right: 0.5rem !important;
+}
+
+.fastt {
+    background-color: rgba(170, 212, 170, 0.459);
+    padding: 5px 0px;
+    color: rgb(55, 160, 28);
+    border-radius: 5px;
+}

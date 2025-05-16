@@ -1,0 +1,149 @@
+/* Código original (sin cambios) */
+.room-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.room-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px;
+  margin-bottom: 20px;
+  background-color: rgba(249, 246, 240, 0.85);
+  backdrop-filter: blur(5px);
+  border-radius: 8px;
+}
+
+.room-info {
+  flex: 1;
+  padding-right: 30px;
+}
+
+.room-info h1 {
+  font-size: 35px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.room-info p {
+  font-size: 20px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.room-amenities {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.amenity {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 16px;
+  color: #777;
+}
+
+.amenity img {
+  width: 18px;
+  height: 18px;
+}
+
+.reserve-button {
+  padding: 10px 20px;
+  background: #B8860B;
+  font-size: 16px;
+  border: none;
+  color: #F5F5F5;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.5s;
+}
+
+.reserve-button:hover {
+  background: #B8860B;
+  font-size: 16px;
+}
+
+.room-image {
+  width: 250px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.room-section:nth-child(odd) {
+  background-color: rgba(249, 246, 240, 0.85);
+}
+
+.room-section:nth-child(even) {
+  background-color: rgba(240, 240, 245, 0.85);
+}
+
+.logo {
+  color: #ffffff;
+}
+
+.h {
+  height: 10px;
+  font-size: 36px;
+  color: rgb(255, 255, 255);
+  padding-top: 3px;
+  padding-bottom: 50px;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Media Queries para hacer responsive sin cambiar diseño original */
+@media (max-width: 900px) {
+  .room-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .room-info {
+    padding-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .room-image {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    margin-bottom: 15px;
+  }
+
+  .room-amenities {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .reserve-button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .room-info h1 {
+    font-size: 28px;
+  }
+
+  .room-info p {
+    font-size: 18px;
+  }
+
+  .amenity {
+    font-size: 14px;
+  }
+
+  .reserve-button {
+    font-size: 14px;
+    padding: 12px 0;
+  }
+}
