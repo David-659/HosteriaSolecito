@@ -71,6 +71,7 @@ class Reserva(models.Model):
         ("I", "INACTIVA"),
         ("C", "CANCELADA"),
         ("P", "PAGADA"),
+        ("V", "VENCIDA"),
     )
     estado = models.CharField(max_length=1, choices=ESTADOS, default="A")
     
