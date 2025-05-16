@@ -1,59 +1,66 @@
 body,
 html {
+    height: 100%;
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
     background-color: #F5F5F5;
     background-repeat: no-repeat;
+    background-image: url("/static/img/imag/fondo_planta.jpg");
     background-position: top center;
     background-size: cover;
     background-attachment: fixed;
-
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
+
 .whatsapp {
-    position:fixed;
-    width:60px;
-    height:60px;
-    bottom:40px;
-    right:40px;
-    background-color:#25d366;
-    color:#FFF;
-    border-radius:50px;
-    text-align:center;
-    font-size:30px;
-    z-index:100;
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    z-index: 100;
 }
+
 .whatsapp-icon {
-    margin-top:13px;
-}
-.foto-perfil {
-    width: 50px; 
-    height: 50px;
-    border-radius: 50%; 
-    border: 2px solid white; 
-    object-fit: cover; 
+    margin-top: 13px;
 }
 
-.usuario-info {
-    display: flex; 
-    align-items: center;
-    gap: 20px; 
-    padding: 5px 12px; 
-    border-radius: 10px; 
+.usuario-info .dropdown-toggle img {
+    transition: transform 0.2s;
+}
+.usuario-info .dropdown-toggle:hover img {
+    transform: scale(1.05);
+}
+.dropdown-menu {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    border-radius: 12px;
 }
 
-.usuario-info a {
-    color: white;
+.tex {
+    color: rgb(0, 0, 0);
     font-size: 20px;
 }
 
+.ola {
+    color: white;
+}
+
 .bienv {
-    font-size: 14px; 
+    font-size: 14px;
     font-weight: bold;
-    color: #fff; 
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); 
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     text-transform: capitalize;
 }
+
 .bienv:hover {
     text-decoration: underline;
 }
@@ -67,10 +74,17 @@ html {
             rgba(0, 0, 0, 0.2) 80%,
             rgba(0, 0, 0, 0) 100%);
     padding-top: 3px;
-    padding-bottom: 50px;
+    padding-bottom: 10px;
     font-family: 'Playfair Display', Georgia, serif;
 }
 
+.logo-header {
+    height: 150px;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    margin-left: 50px;
+}
 
 .modalt {
     display: none;
@@ -79,15 +93,14 @@ html {
     align-items: center;
     transition: opacity 0.3s ease-in-out;
     margin: 30px 0px;
-
 }
 
 .modalt-content {
     background: #fff;
-    padding: 40px; 
-    width: 95%; 
-    max-width: 700px; 
-    border-radius: 15px; 
+    padding: 40px;
+    width: 95%;
+    max-width: 700px;
+    border-radius: 15px;
     text-align: left;
     animation: fadeIn 0.3s ease-in-out;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
@@ -98,7 +111,6 @@ html {
         transform: translateY(-20px);
         opacity: 0;
     }
-
     to {
         transform: translateY(0);
         opacity: 1;
@@ -122,7 +134,6 @@ html {
     color: #ff4d4d;
 }
 
-
 .modalt h2 {
     margin-bottom: 15px;
     font-size: 24px;
@@ -143,24 +154,9 @@ html {
     padding-left: 20px;
 }
 
-
 .modalt strong {
     color: #222;
 }
-
-
-.footer-column a {
-    cursor: pointer;
-    text-decoration: underline;
-    color: #fff;
-    font-weight: bold;
-}
-
-.footer-column a:hover {
-    color: #ffcc00;
-}
-
-
 
 .close-btn {
     position: absolute;
@@ -172,29 +168,12 @@ html {
     background: none;
 }
 
-
 .navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0px 20px;
-}
-
-.navbar .logo {
-    font-size: 37px;
-    font-family: 'Playfair Display', Georgia, serif;
-    text-shadow: 0 0 15px #B8860B, 0 0 15px #B8860B;
-    font-weight: bold;
-    color: #F5F5F5;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    background-image: url('https://png.pngtree.com/background/20231030/original/pngtree-nature-inspired-3d-render-of-a-tranquil-hotel-interior-picture-image_5796947.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    margin-right: 15px;
 }
 
 .seccion {
@@ -208,6 +187,31 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
+/* ====== MENÚ HAMBURGUESA ====== */
+.menu-toggle {
+    display: none;
+}
+
+.menu-icon {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    z-index: 400;
+    margin-left: 10px;
+}
+
+.menu-icon span {
+    height: 4px;
+    width: 30px;
+    background: #F5F5F5;
+    margin: 5px 0;
+    border-radius: 2px;
+    transition: 0.4s;
+}
 
 .nav-links {
     display: flex;
@@ -240,6 +244,21 @@ body {
     border-radius: 50px;
 }
 
+@media (max-width: 900px) {
+    .navbar-content {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0;
+        width: 100%;
+    }
+    .navbar-auth {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
 .auth-btn {
     padding: 10px 20px;
     background: #B8860B;
@@ -254,29 +273,6 @@ body {
 .auth-btn:hover {
     background: #B8860B;
     font-size: 24px;
-}
-
-@media (max-width: 768px) {
-    .main-container {
-        flex-direction: column;
-    }
-
-    .image-container {
-        max-width: 100%;
-    }
-
-    .room-container {
-        flex-direction: column;
-    }
-
-    .room-container .image-container {
-        margin-right: 0;
-        margin-bottom: 20px;
-    }
-
-    .twin-title {
-        margin-left: 5%;
-    }
 }
 
 footer {
@@ -328,19 +324,16 @@ footer .container {
     font-size: 14px;
 }
 
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
 }
-
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 15px;
 }
-
 
 .service-section {
     display: flex;
@@ -397,7 +390,6 @@ footer .container {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-
 .service-section:nth-child(even) {
     flex-direction: row-reverse;
 }
@@ -418,60 +410,6 @@ footer .container {
 .service-image {
     position: relative;
     z-index: 1;
-}
-
-
-
-@media (max-width: 768px) {
-    .service-section {
-        flex-direction: column;
-    }
-}
-
-.button:hover {
-    --edge-light: hsla(0, 0%, 50%, 1);
-    text-shadow: 0px 0px 10px var(--text-light);
-    text-align: center;
-}
-
-.service-image {
-    margin-top: 20px;
-}
-
-.service-title {
-    font-size: 2rem;
-}
-
-
-
-@media (max-width: 768px) {
-    .navbar a {
-        margin: 0 10px;
-        font-size: 14px;
-    }
-
-    .navbar .logo {
-        font-size: 20px;
-    }
-
-    .navbar .reserve-btn {
-        padding: 8px 16px;
-        font-size: 14px;
-        border-radius: 10px;
-    }
-
-    .container {
-        flex-direction: column;
-    }
-
-    .text-section {
-        padding: 20px;
-    }
-
-    .text-section h1 {
-        font-size: 28px;
-    }
-
 }
 
 .button {
@@ -500,7 +438,6 @@ footer .container {
     color: hsla(0, 0%, 90%);
     border: 0;
     box-shadow: inset 0.4px 1px 4px var(--edge-light);
-
     transition: all 0.1s var(--bezier);
 }
 
@@ -526,42 +463,77 @@ footer .container {
     transform: scale(1);
 }
 
-.message {
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: relative;
+/* ====== MENSAJES MEJORADOS ====== */
+.messages-container {
+    max-width: 500px;
+    margin: auto;
+    padding: 0 15px;
 }
 
+.message {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    position: relative;
+    font-size: 1.1em;
+    margin-bottom: 18px;
+    animation: fadeIn 0.5s;
+    color: #F5F5F5; /* texto blanco */
+}
+
+/* Mantener colores originales según tags */
 .message.success {
-    background-color: #d4edda;
-    color: #155724;
-    border-left: 5px solid #28a745;
+    background-color: #28a745; /* verde */
 }
 
 .message.error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border-left: 5px solid #dc3545;
-}
-
-.message.info {
-    background-color: #d1ecf1;
-    color: #0c5460;
-    border-left: 5px solid #17a2b8;
+    background-color: #dc3545; /* rojo */
 }
 
 .message.warning {
-    background-color: #fff3cd;
-    color: #856404;
-    border-left: 5px solid #ffc107;
+    background-color: #ffc107; /* amarillo */
+    color: #000; /* texto negro para contraste */
 }
 
-.message.debug {
-    background-color: #e2e3e5;
-    color: #383d41;
-    border-left: 5px solid #6c757d;
+.message.info {
+    background-color: #17a2b8; /* azul */
+}
+
+/* Icono del mensaje */
+.message-icon {
+    font-size: 1.5em;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+/* Texto del mensaje */
+.message-text {
+    flex: 1;
+}
+
+/* Botón cerrar mensaje */
+.close-message {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1.4em;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: color 0.2s;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.close-message:hover {
+    color: #B8860B;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-15px);}
+    to { opacity: 1; transform: translateY(0);}
 }
 
 footer {
@@ -571,45 +543,238 @@ footer {
     padding: 20px;
     position: relative;
     bottom: 0;
-  }
-  
-  footer .container {
+}
+
+footer .container {
     max-width: 700px;
-  }
-  
-  .footer {
+}
+
+.footer {
     display: flex;
     justify-content: space-between;
     padding: 40px;
     background-color: black;
-  }
-  
-  .footer-column {
+}
+
+.footer-column {
     display: flex;
     flex-direction: column;
-  }
-  
-  .footer a {
+}
+
+.footer a {
     color: white;
     text-decoration: none;
     margin-bottom: 8px;
-  }
-  
-  .footer a:hover {
+}
+
+.footer a:hover {
     text-decoration: underline;
-  }
-  
-  .bold {
+}
+
+.bold {
     font-weight: bold;
-  }
-  
-  .next {
+}
+
+.next {
     align-self: flex-end;
     text-align: right;
-  }
-  
-  .copyright {
+}
+
+.copyright {
     margin-top: 20px;
     text-align: center;
     font-size: 14px;
-  }
+}
+
+/* ====== RESPONSIVE MENÚ HAMBURGUESA ====== */
+@media (max-width: 900px) {
+    .menu-icon {
+        display: flex;
+        position: absolute;
+        top: 35px;
+        right: 30px;
+    }
+    .nav-links.menu {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        top: 80px;
+        right: 0;
+        background: rgba(0,0,0,0.95);
+        width: 100vw;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        padding: 30px 0 20px 0;
+        z-index: 300;
+    }
+    .nav-links.menu li {
+        margin: 15px 0;
+    }
+    .menu-toggle:checked + .menu-icon span:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+    }
+    .menu-toggle:checked + .menu-icon span:nth-child(2) {
+        opacity: 0;
+    }
+    .menu-toggle:checked + .menu-icon span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+    .menu-toggle:checked ~ .menu {
+        display: flex;
+    }
+}
+
+/* Tablets y dispositivos medianos (768px-1024px) */
+@media (max-width: 1024px) {
+    .logo-header {
+        height: 120px;
+        margin-left: 20px;
+    }
+    .nav-links li a {
+        font-size: 20px;
+        padding: 8px 12px;
+    }
+    .nav-links li a:hover {
+        font-size: 22px;
+    }
+    .auth-btn {
+        font-size: 18px;
+        padding: 8px 16px;
+    }
+    .service-title {
+        font-size: 2rem;
+    }
+    .service-content {
+        padding: 0 20px;
+    }
+}
+
+/* Móviles y dispositivos pequeños (menos de 768px) */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+    }
+    .image-container {
+        max-width: 100%;
+    }
+    .room-container {
+        flex-direction: column;
+    }
+    .room-container .image-container {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    .twin-title {
+        margin-left: 5%;
+    }
+    .navbar {
+        flex-direction: column;
+        padding: 10px;
+        margin-right: 0;
+    }
+    .logo-header {
+        height: 100px;
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        margin-top: 10px;
+    }
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+    .nav-links li a {
+        font-size: 18px;
+        display: block;
+        padding: 8px 0;
+    }
+    .nav-links li a:hover {
+        font-size: 19px;
+        padding: 8px 0;
+    }
+    .auth-btn {
+        font-size: 16px;
+        padding: 8px 15px;
+        margin-top: 10px;
+    }
+    .service-section {
+        flex-direction: column !important;
+        padding: 30px 0;
+    }
+    .service-content {
+        padding: 20px;
+        order: 2;
+    }
+    .service-image {
+        order: 1;
+        margin-bottom: 20px;
+        padding: 0 20px;
+    }
+    .service-title {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+    .footer {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+    }
+    .footer-column {
+        align-items: center;
+    }
+    .next {
+        align-self: center;
+        text-align: center;
+    }
+    .modalt-content {
+        padding: 30px 15px;
+    }
+    .whatsapp {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 25px;
+    }
+    .whatsapp-icon {
+        margin-top: 12px;
+    }
+    .button:hover {
+        transform: scale(1.05);
+    }
+}
+
+/* Dispositivos muy pequeños (menos de 480px) */
+@media (max-width: 480px) {
+    .logo-header {
+        height: 80px;
+    }
+    .service-title {
+        font-size: 1.5rem;
+    }
+    .seccion {
+        font-size: 1.5em;
+    }
+    .tex {
+        font-size: 16px;
+    }
+    .modalt-content {
+        padding: 20px 10px;
+    }
+    .modalt h2 {
+        font-size: 20px;
+    }
+    .modalt p,
+    .modalt ul {
+        font-size: 14px;
+    }
+    .button {
+        font-size: 16px;
+        min-height: 2.2em;
+    }
+}

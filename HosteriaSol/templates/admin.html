@@ -13,44 +13,77 @@
             <li><a class="dropdown-item" href="#">Reservas</a></li>
             <li><a class="dropdown-item" href="{% url 'listar_habitaciones' %}">Habitaciones</a></li>
             <li><a class="dropdown-item" href="{% url 'listar_clientes' %}">Usuarios</a></li>
+            <li><a class="dropdown-item" href="{% url 'listar_servicios' %}">Servicios</a></li>
+            <li><a class="dropdown-item" href="{% url 'listar_empleados' %}">Empleados</a></li>
         </ul>
     </div>
     <h2>Administración de Reservas</h2>
-    <h3>Reservas</h3>
     <div class="table-container" >
         <table>
             <thead>
                 <tr>
-                    <th>Nombre</th>
+                    <th>Cliente</th>
                     <th>Empleado</th>
                     <th>Días</th>
+                    <th>Habitaciones</th>
+                    <th>Número de Personas</th>
                     <th>Costo</th>
+                    <th>Estado</th>
                     <th>Acción</th>
                 </tr>
             </thead>
             <tbody id="reservasTable">
-                {% if data %}
-                {% for reserva in data %}
-                <tr>
-                    <td>{{ reserva.cliente.nombre }}</td>
-                    <td>{{ reserva.empleado.nombre }}</td>
-                    <td>Desde {{ reserva.fecha_inicio }} Hasta {{ reserva.fecha_fin }}</td>
-                    <td>{{ reserva.pago.monto_total }}</td>
-                    
-                    <td>
-                        <a class="btn" href="javascript:confirmar_eliminar(`{% url 'eliminar_reserva' reserva.id %}`);">Eliminar</a>
-                        <a class="btn" href="{% url 'editar_reserva' reserva.id %}">Editar</a>
-                    </td>
-                </tr>
-                {% endfor %}
+                {% if reserva_existente %}
+                    {% for item in reserva_existente %}
+                    <tr>
+                        <td>{{ item.reserva.cliente.nombre }}</td>
+                        <td>{{ item.reserva.empleado.nombre }}</td>
+                        <td>Desde {{ item.reserva.fecha_inicio }} Hasta {{ item.reserva.fecha_fin }}</td>
+                        <td>
+                            
+                            {% if item.reserva.total_habitaciones %}
+                                {{ item.reserva.total_habitaciones }}-
+                                {{ item.reserva.nombres_habitaciones }}
+                            {% else %}  
+                                Sin habitaciones asignadas
+                            {% endif %}
+                        </td>
+                        <td>{{ item.reserva.num_p }}</td>
+                        <td>{{ item.reserva.pago.monto_total }}</td>
+                        <td>{{ item.reserva.get_estado_display }}</td>
+                        <td>
+                            {% if item.reserva.estado == "C" %}
+                                <a class="bot">cancelada</a>
+                            {% elif item.reserva.estado == "P" %}
+                                {% if item.reserva.id %}
+                                    <a class="bot" href="javascript:confirmar_eliminar(`{% url 'cancelar_reserva' item.reserva.id %}`);">Reembolzar</a>
+                                {% else %}
+                                    <a class="bot" disabled>Reembolzar</a>
+                                {% endif %}
+                            {% else %}
+                                {% if item.reserva.id %}
+                                    <a class="bot" href="javascript:confirmar_eliminar(`{% url 'cancelar_reserva' item.reserva.id %}`);">Cancelar</a>
+                                {% else %}
+                                    <a class="bot" disabled>Cancelar</a>
+                                {% endif %}
+                            {% endif %}
+                            {% if item.habitacion and item.reserva.id %}
+                                <a class="bot" href="{% url 'editar_reserva_hab' item.reserva.id item.habitacion.id %}">Editar</a>
+                            {% elif item.reserva.id %}
+                                <a class="bot" href="{% url 'editar_reserva' item.reserva.id %}">Editar</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
                 {% else %}
-                    <p>No hay reservas aún...</p>
+                    <tr>
+                        <td colspan="8">No hay reservas aún...</td>
+                    </tr>
                 {% endif %}
-
             </tbody>
         </table>
     </div>
 </div>
-   
+
 <script src="{% static 'js/admin.js' %}"></script>
 {% endblock %}

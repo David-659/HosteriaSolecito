@@ -1,9 +1,12 @@
 
 .oi {
-    font-family: 'Playfair Display', Georgia, serif;
-    color: black;
-    padding: 30px;
+    color: #f5f5f5;
+    text-shadow: 0 0 15px #090a0a, 0 0 15px #B8860B;
+    font-weight: bold;
+    font-size: 3rem;
     text-align: center;
+    font-family: 'Playfair Display', Georgia, serif;
+    margin-bottom: 60px;
 }
 .menu {
     display: flex;

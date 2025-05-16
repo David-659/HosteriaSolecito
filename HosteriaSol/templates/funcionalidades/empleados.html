@@ -1,0 +1,58 @@
+{% extends '-bases.html' %}
+{% load static %}
+{% block tittle %}Agregar Empleado{% endblock %}
+{% block style %} {% static 'css/Register.css' %} {% endblock %}
+
+{% block cuerpo %}
+<div class="register-container">
+    {% if datos %}
+        <h2>Editar Empleado {{ datos.nombre }}</h2>
+    {% else %}
+        <h2>Agregar Empleado</h2>
+    {% endif %}
+
+    <form class="register-form row g-3" enctype="multipart/form-data" method="POST" action="{% if datos %}{% url 'editar_empleados' datos.id %}{% else %}{% url 'agregar_empleados' %}{% endif %}">
+        {% csrf_token %}
+        
+        <div class="col-md-6">
+            <label class="form-label">Nombre:</label>
+            <input type="text" name="nombre" class="form-control" value="{{ datos.nombre|default_if_none:'' }}" required>
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">Apellido:</label>
+            <input type="text" name="apellido" class="form-control" value="{{ datos.apellido|default_if_none:'' }}" required>
+        </div>
+
+        <div class="col-md-8">
+            <label class="form-label">Correo:</label>
+            <input type="email" name="correo" class="form-control" value="{{ datos.correo|default_if_none:'' }}" required>
+        </div>
+
+        <div class="col-md-8">
+            <label class="form-label">Foto del empleado:</label>
+            {% if datos.foto %}
+                <br><img src="{{ datos.foto.url }}" alt="Foto del empleado" width="120px" height="120px" style="border-radius: 10px; display: block; margin-bottom: 10px;">
+            {% endif %}
+            <input type="file" class="form-control" name="foto" accept="image/*">
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">Cargo:</label>
+            <select name="cargo" class="form-control" required>
+                <option value="Recepcionista" {% if datos.cargo == 'Recepcionista' %}selected{% endif %}>Recepcionista</option>
+                <option value="Auxiliar_Aseo" {% if datos.cargo == 'Auxiliar_Aseo' %}selected{% endif %}>Auxiliar de Aseo</option>
+                <option value="Tecnico_Mantenimiento" {% if datos.cargo == 'Tecnico_Mantenimiento' %}selected{% endif %}>Técnico de Mantenimiento</option>
+                <option value="Cocinero" {% if datos.cargo == 'Cocinero' %}selected{% endif %}>Cocinero</option>
+                <option value="Mesero" {% if datos.cargo == 'Mesero' %}selected{% endif %}>Mesero</option>
+            </select>
+        </div>
+
+        <div class="col-md-4 d-flex align-items-end">
+            <button type="submit" class="btn-register w-100">
+                {% if datos %}Actualizar{% else %}Agregar{% endif %}
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

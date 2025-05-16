@@ -9,39 +9,40 @@
         {% else %}
             <h2>Agregar Habitacion</h2>
         {% endif %}
-        <form class="register-form" enctype="multipart/form-data" action="{% if datos %}{% url 'editar_habitacion' datos.id %}{% else %}{% url 'agregar_habitacion' %}{% endif %}" method="post">
+        <form class="register-form row g-3" enctype="multipart/form-data" action="{% if datos %}{% url 'editar_habitacion' datos.id %}{% else %}{% url 'agregar_habitacion' %}{% endif %}" method="post">
             {% csrf_token %}
-            <div class="input-group">
-                <label>nombre</label>
-                <input name="nombre" value="{{datos.nombre}}" type="text"  placeholder="Introduce tu nombre de usuario" required>
+            <div class="col-md-12">
+                <label class="form-label">nombre</label>
+                <input class="form-control" name="nombre" value="{% if datos %}{{datos.nombre}}{% else %}{{ request.session.data.nombre }}{% endif %}" type="text"  placeholder="Introduce tu nombre de usuario" required>
             </div>
-            <div class="input-group">
-                <label>Descripción: </label>
-                <textarea name="descripcion" type="textarea" placeholder="Describe la habitación" required>{{ datos.descripcion }}</textarea>
+            <div class=" col-md-12">
+                <label class="form-label">Descripción: </label>
+                <textarea class="form-control" value="{% if datos %}{{datos.descripcion}}{% else %}{{ request.session.data.descripcion }}{% endif %}" rows="3" name="descripcion" type="textarea" placeholder="Describe la habitación" required>{{ datos.descripcion }}</textarea>
             </div>
-            <div class="input-group">
-                <label>Capacidad</label>
-                <input name="capacidad" value="{{ datos.capacidad }}" type="number" min="1" placeholder="Capacidad máxima" required>
+            <div class=" col-md-2">
+                <label class="form-label">Capacidad</label>
+                <input class="form-control" name="capacidad" value="{% if datos %}{{ datos.capacidad }}{% else %}{{ request.session.data.capacidad }}{% endif %}" type="number" min="1" placeholder="Capacidad máxima" required>
             </div>
-            <div class="input-group">
-                <label>Precio: </label>
-                <input name="precio" value="{{ datos.precio|stringformat:'.2f' }}" type="number" placeholder="Ej: 250000.00" required>
+            <div class=" col-md-5">
+                <label class="form-label">Precio: </label>
+                <input name="precio" class="form-control" value="{% if datos %}{{ datos.precio|stringformat:'.2f' }}{% else %}{{ request.session.data.precio }}{% endif %}" type="number" placeholder="Ej: 250000.00" required>
             </div>
-            <div class="input-group">
-                <label>Foto de Habitacion:</label><br>
+            <div class="col-md-8">
+                <label class="form-label">Foto de Habitacion:</label>
                 {% if datos %}
                     <br><img src="{{ datos.foto.url }}" alt="Foto de perfil" width="120px" height="120px" style="border-radius: 10px; display: block; margin-bottom: 10px;">
                 {% endif %}
-                <input type="file" name="foto" accept="image/*">
+                <input type="file"  class="form-control" id="fotoInput" name="foto" accept="image/*">
             </div>
-            <div class="input-group">
-                <select name="estado" required>
+            <div class="col-md-10">
+                <label class="form-label">Estado:</label>
+                <select name="estado" class="form-control" required>
                     <option value="D" {% if datos.estado == "D" %}selected{% endif %}>Disponible</option>
                     <option value="R" {% if datos.estado == "N" %}selected{% endif %}>Reservada</option>
                     <option value="L" {% if datos.estado == "L" %}selected{% endif %}>En limpieza</option>
                 </select>
             </div>
-            <button type="submit" class="btn-register">{% if datos %}Actualizar{% else %}Registrarse{% endif %}</button>
+            <button type="submit" class="btn-register col-md-3">{% if datos %}Actualizar{% else %}Registrarse{% endif %}</button>
         </form>
     </div>
 {% endblock %}

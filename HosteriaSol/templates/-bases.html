@@ -24,38 +24,74 @@
     </a>
     <header class="header">
         <nav class="navbar">
-            <img src="{% static 'img/fotos/logo.png' %}">
-            <div class="logo">Hostería Solecito</div>
-            <ul class="nav-links">
+            <img src="{% static 'img/fotos/logo.png' %}" class="logo-header" alt="Logo">
+    
+            <input type="checkbox" id="menu-toggle" class="menu-toggle" />
+            <label for="menu-toggle" class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+    
+            <ul class="nav-links menu">
                 <li><a href="{% url 'index' %}">Inicio</a></li>
                 <li><a href="{% url 'Habitaciones' %}">Habitaciones</a></li>
                 <li><a href="{% url 'Galeria' %}">Galería</a></li>
-                <li><a href="{% url 'Reservas' %}">Reservas</a></li>
+                <li><a href="{% url 'agregar_reservas' %}">Reservas</a></li>
+                <li><a href="{% url 'Servicios' %}">Servicios</a></li>
                 <li><a href="{% url 'Nosotros' %}">Nosotros</a></li>
                 {% if request.session.auth.rol == "Administrador" %}
                     <li><a href="{% url 'Administrador' %}">Admin</a></li>
                 {% endif %}
             </ul>
-            {% if request.session.auth %}
-                <div class="usuario-info">
-                    <p class="bien"><img  class="foto-perfil" src="{{ request.session.auth.foto }}"></p>
-                    <a href="{% url 'editar_registro' request.session.auth.id %}"><strong>Perfil</strong></a><br>              
-                    <a href="{% url 'logout' %}" class="auth-btn">Cerrar Sesión</a>
-                    <a href="{% url 'cambiar_clave' %}" class="auth-btn">Cambiar contraseña</a>
-                </div> 
-            {% else %}
-                <div class="usuario-info">
-                    <a href="{% url 'login' %}"><button class="auth-btn">Login</button></a>
-                    <a href="{% url 'agregar_registro' %}"><button class="auth-btn">Registrar</button></a>
-                    <p class="bienv">No hay sesión</p>
+                {% if request.session.auth %}
+                <div class="dropdown usuario-info">
+                    <button class="btn dropdown-toggle p-0 border-0 bg-transparent" type="button" id="dropdownPerfil" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img class="rounded-circle" src="{{ request.session.auth.foto }}" alt="Foto perfil" width="40" height="40">
+                    </button>
+                
+                    <ul class="dropdown-menu dropdown-menu-end text-center p-3" aria-labelledby="dropdownPerfil" style="min-width: 200px;">
+                        <li>
+                            <img class="rounded-circle mb-2" src="{{ request.session.auth.foto }}" alt="Foto perfil" width="60" height="60">
+                        </li>
+                        <li class="fw-bold">{{ request.session.auth.nombre }}</li>
+                        <li class="text-muted small mb-2">{{ request.session.auth.correo }}</li>
+                        <li><a class="dropdown-item tex" href="{% url 'editar_registro' request.session.auth.id %}">Ver perfil</a></li>
+                        <li><a class="dropdown-item tex" href="{% url 'cambiar_clave' %}">Cambiar contraseña</a></li>
+                        <li><a class="dropdown-item tex text-danger" href="{% url 'logout' %}">Cerrar sesión</a></li>
+                    </ul>
                 </div>
-            {% endif %} 
+                
+                {% else %}
+                    <div >
+                        <a href="{% url 'login' %}"><button class="auth-btn">Login</button></a>
+                        <a href="{% url 'agregar_registro' %}"><button class="auth-btn">Registrar</button></a>
+                    </div>
+                {% endif %} 
         </nav>
     </header>
     {% if messages %}
+        <div class="messages-container">
         {% for message in messages %}
-                <p class="message {{ message.tags }}">{{ message }}</p>
+            <div class="message {{ message.tags }}">
+                <span class="message-icon">
+                    {% if "success" in message.tags %}
+                        ✔️
+                    {% elif "error" in message.tags %}
+                        ❌
+                    {% elif "warning" in message.tags %}
+                        ⚠️
+                    {% elif "info" in message.tags %}
+                        ℹ️
+                    {% else %}
+                        💬
+                    {% endif %}
+                </span>
+                <span class="message-text">{{ message }}</span>
+                <button class="close-message" onclick="this.parentElement.style.display='none';">&times;</button>
+            </div>
         {% endfor %}
+        </div>
     {% endif %}
     {% block cuerpo %}
 
@@ -72,7 +108,7 @@
             <a href="{% url 'index' %}">Inicio</a>
             <a href="{% url 'Habitaciones' %}">Habitaciones</a>
             <a href="{% url 'Galeria' %}">Galería</a>
-            <a href="{% url 'Reservas' %}">Reservas</a>
+            <a href="{% url 'agregar_reservas' %}">Reservas</a>
             <a href="{% url 'Nosotros' %}">Nosotros</a>
         </div>
         
@@ -87,10 +123,18 @@
         </div>
     
         <div class="social-icons">
-            <img src="https://img.icons8.com/?size=50&id=59780&format=png&color=ffffff" alt="Instagram">
-            <img src="https://img.icons8.com/?size=50&id=59813&format=png&color=ffffff" alt="Facebook">
-            <img src="https://img.icons8.com/?size=48&id=phOKFKYpe00C&format=png&color=ffffff" alt="TikTok">
-            <img src="https://img.icons8.com/?size=50&id=62855&format=png&color=ffffff" alt="WhatsApp">
+            <a href="https://instagram.com" target="_blank">
+                <img src="https://img.icons8.com/?size=50&id=59780&format=png&color=ffffff" alt="Instagram">
+            </a>
+            <a href="https://facebook.com" target="_blank">
+                <img src="https://img.icons8.com/?size=50&id=59813&format=png&color=ffffff" alt="Facebook">
+            </a>
+            <a href="https://tiktok.com" target="_blank">
+                <img src="https://img.icons8.com/?size=48&id=phOKFKYpe00C&format=png&color=ffffff" alt="TikTok">
+            </a>
+            <a href="https://whatsapp.com" target="_blank">
+                <img src="https://img.icons8.com/?size=50&id=62855&format=png&color=ffffff" alt="WhatsApp">
+            </a>
         </div>
         
         <div class="footer-column">
@@ -99,7 +143,7 @@
         </div>
     </footer>
     <script src="{% block js %}  {% endblock %}"></script>
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+   <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 
 </body>
 </html>

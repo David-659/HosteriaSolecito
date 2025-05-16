@@ -7,63 +7,94 @@
     <div class="register-container">
         {% if datos %}
             <h2>Editar Usuario {{ datos.nombre }}</h2>
-        {% else %}
+        {% elif request.session.admin %}
             <h2>Agregar Usuario</h2>
+        {% else %}
+            <h2>Registrarse</h2>
         {% endif %}
-        <form class="register-form" method="post" action="{% if datos %}{% url 'editar_registro' request.session.auth.id %}{% else %}{% url 'agregar_registro' %}{% endif %}" enctype="multipart/form-data">
+        <form class="register-form  row g-3" method="post" action="{% if datos %}{% url 'editar_registro' datos.id %}{% else %}{% url 'agregar_registro' %}{% endif %}" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="input-group">
-                <label >Nombre de usuario</label>
-                <input value="{{datos.nombre}}" name="nombre" type="text" id="username" placeholder="Introduce tu nombre de usuario" required>
+            <div class=" col-md-6">
+                <label class="form-label" >Nombre de usuario completo</label>
+                <input value="{% if datos %}{{datos.nombre}}{% else %}{{ request.session.data.nombre }}{% endif %}" name="nombre" class="form-control" type="text" id="username" placeholder="Introduce tu nombre de usuario completo" required>
             </div>
-            <div class="input-group">
-                <label>Correo electrónico</label>
-                <input value="{{datos.correo}}" name="correo" type="email" id="email" placeholder="Introduce tu correo electrónico" required>
+            <div class="col-md-6">
+                <label class="form-label">Correo electrónico</label>
+                <input value="{% if datos %}{{datos.correo}}{% else %}{{ request.session.data.correo }}{% endif %}" name="correo" class="form-control" type="email" id="email" placeholder="Introduce tu correo electrónico" required>
             </div>
-            <div class="input-group">
-                <label >Tipo documento: </label>
-                <select name="tipo_documento">
+            <div class="col-md-4">
+                <label class="form-label">Tipo documento: </label>
+                <select name="tipo_documento" class="form-select">
                     <option value="">Seleccione</option>
                     <option value="1" {% if datos.tipo_documento == 1 %}selected=""{% endif %}>Cedula de Ciudadania</option>
-                    <option value="2"  {% if datos.tipo_documento == 2 %}selected=""{% endif %}>Tarjeta de Identidad</option>
-                    <option value="3"  {% if datos.tipo_documento == 3 %}selected=""{% endif %}>Cedula de Extranjeria</option>
+                    <option value="3"  {% if datos.tipo_documento == 3 %}selected=""{% endif %}>Cedula de Extranjeria</option> 
                     <option value="4"  {% if datos.tipo_documento == 4 %}selected=""{% endif %}>Pasaporte</option>
                 </select>
             </div>
-            <div class="input-group">
-                <label >Documento</label>
-                <input value="{{datos.documento}}" name="documento" type="number" placeholder="Introduce tu Documento" required>
+            <div class="col-md-8">
+                <label class="form-label">Documento</label>
+                <input value="{% if datos %}{{datos.documento}}{% else %}{{ request.session.data.documento }}{% endif %}" name="documento" class="form-control" type="number" placeholder="Introduce tu Documento" required>
             </div>
-            <div class="input-group">
-                <label >Telefono: </label>
-                <input value="{{datos.telefono}}" name="telefono" type="number" placeholder="Introduce tu numero de telefono" required>
+            <div class="col-md-5">
+                <label class="form-label">Telefono: </label>
+                <input value="{% if datos %}{{datos.telefono}}{% else %}{{ request.session.data.telefono }}{% endif %}" name="telefono" type="number" class="form-control" placeholder="Introduce tu numero de telefono" required>
             </div>
-            <div class="input-group">
-                <label >Direccion: </label>
-                <input value="{{datos.direccion}}" name="direccion" type="text" placeholder="Introduce tu Dirección" required>
+
+            <div class="col-md-7">
+                <label class="form-label">Direccion: </label>
+                <input value="{% if datos %}{{datos.direccion}}{% else %}{{ direccion }}{% endif %}" name="direccion" class="form-control" type="text" placeholder="Introduce tu Dirección" required>
             </div>
-            <div class="input-group">
-                <label>Foto de Perfil:</label><br>
+            <div class="col-md-12 file">
+                <label class="form-label">Foto de Perfil:</label><br>
                 {% if datos %}
                     <br><img src="{{ datos.foto.url }}" alt="Foto de perfil" width="120px" height="120px" style="border-radius: 10px; display: block; margin-bottom: 10px;">
                 {% endif %}
-                <input type="file" name="foto" accept="image/*">
+                <input type="file" class="form-control" name="foto" id="fotoInput" accept="image/*" onchange="validarArchivoImagen(this)">
+                <div id="alertaError" style="color: red; display: none; margin-top: 5px;">Error: Solo se permiten archivos de imagen.</div>
             </div>
             {% if datos %}
-                
+            <div class="col-md-4">
+                <label class="form-label">Tipo de rol </label>
+                <select name="rol" class="form-select">
+                    <option value="">Seleccione</option>
+                    <option value="1" {% if datos.rol == 1 %}selected="Administrador"{% endif %}>Administrador</option>
+                    <option value="2"  {% if datos.rol == 2 %}selected="Cliente"{% endif %}>Cliente</option>
+                </select>
+            </div>
+            {% elif request.session.admin %}
+                <div class="col-md-7">
+                    <label class="form-label">Tipo de rol </label>
+                    <select name="tipo_documento" class="form-select">
+                        <option value="">Seleccione</option>
+                        <option value="1" {% if datos.rol == 1 %}selected="Administrador"{% endif %}>Administrador</option>
+                        <option value="2"  {% if datos.rol == 2 %}selected="Cliente"{% endif %}>Cliente</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Contraseña</label>
+                    <input value="{{datos.password}}" name="password" class="form-control" type="password" id="password" placeholder="Introduce tu contraseña" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Confirma Contraseña</label>
+                    <input value="{{datos.password}}" type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Confirma tu contraseña" required>
+                </div>
+                <div class="terminos">
+                    <input {% if datos %}selected=""{% endif %} type="checkbox" class="form-check-input" name="terminos" required>
+                    Acepto los <a href="{% url 'terminos' %}" target="_blank">términos y condiciones</a>
+                </div>
             {% else %}
-            <div class="input-group">
-                <label>Contraseña</label>
-                <input value="{{datos.password}}" name="password" type="password" id="password" placeholder="Introduce tu contraseña" required>
-            </div>
-            <div class="input-group">
-                <label>Confirma Contraseña</label>
-                <input value="{{datos.password}}" type="password" name="confirm_password" id="confirm_password" placeholder="Confirma tu contraseña" required>
-            </div>
-            <div class="terminos">
-                <input {% if datos %}selected=""{% endif %} type="checkbox" name="terminos" required>
-                Acepto los <a href="{% url 'terminos' %}" target="_blank">términos y condiciones</a>
-            </div>
+                <div class="col-md-6">
+                    <label class="form-label">Contraseña</label>
+                    <input value="{{datos.password}}" name="password" class="form-control" type="password" id="password" placeholder="Introduce tu contraseña" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Confirma Contraseña</label>
+                    <input value="{{datos.password}}" type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Confirma tu contraseña" required>
+                </div>
+                <div class="terminos">
+                    <input {% if datos %}selected=""{% endif %} type="checkbox" class="form-check-input" name="terminos" required>
+                    Acepto los <a href="{% url 'terminos' %}" target="_blank">términos y condiciones</a>
+                </div>
             {% endif %}
             <br>
             <button type="submit" class="btn-register">{% if datos %}Actualizar{% else %}Registrarse{% endif %}</button>

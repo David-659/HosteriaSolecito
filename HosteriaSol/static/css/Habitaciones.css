@@ -1,3 +1,4 @@
+/* Código original (sin cambios) */
 .room-container {
   display: flex;
   flex-direction: column;
@@ -28,11 +29,10 @@
 }
 
 .room-info p {
-  font-size: 14px;
+  font-size: 20px;
   color: #666;
   line-height: 1.6;
   margin-bottom: 20px;
-  font-size: 20px;
 }
 
 .room-amenities {
@@ -86,8 +86,6 @@
   background-color: rgba(240, 240, 245, 0.85);
 }
 
-
-
 .logo {
   color: #ffffff;
 }
@@ -99,4 +97,53 @@
   padding-top: 3px;
   padding-bottom: 50px;
   font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Media Queries para hacer responsive sin cambiar diseño original */
+@media (max-width: 900px) {
+  .room-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .room-info {
+    padding-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .room-image {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    margin-bottom: 15px;
+  }
+
+  .room-amenities {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .reserve-button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .room-info h1 {
+    font-size: 28px;
+  }
+
+  .room-info p {
+    font-size: 18px;
+  }
+
+  .amenity {
+    font-size: 14px;
+  }
+
+  .reserve-button {
+    font-size: 14px;
+    padding: 12px 0;
+  }
 }

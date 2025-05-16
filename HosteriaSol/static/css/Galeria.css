@@ -1,95 +1,135 @@
-
-
-.top-bar {
-    display: flex;
-    justify-content: flex-end; 
-    padding: 10px 20px;
-    font-size: 17px;
-    color: #5F6368;
+.gallery .row {
+    margin: 0;
 }
 
-.reserve-btn {
-    padding: 10px 20px;
-    background: #D17A22;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.reserve-btn:hover {
-    background: #A6601A;
-}
-
-.gallery-title {
+.gali{
+    color: #f5f5f5;
+    text-shadow: 0 0 15px #090a0a, 0 0 15px #B8860B;
+    font-weight: bold;
+    font-size: 3rem;
     text-align: center;
-    font-size: 32px;
-    margin-top: 20px;
-    color: #ffffff;
-    text-shadow: 2px 2px 4px rgb(51, 50, 50);
-}
+    font-family: 'Playfair Display', Georgia, serif;
+    margin-bottom: 60px;
+} 
 
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-.gallery a {
-    display: block;
-    border-radius: 10px;
-    overflow: hidden;
-    text-align: center;
-    color: #4D3030;
-    border: 4px solid #fdfdfd; 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); 
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.gallery img {
+.galeria-thumb {
     width: 100%;
-    height: 300px;
+    height: 200px;
     object-fit: cover;
-    display: block;
+    border-radius: 10px;
+    background-color: white;
+    padding: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.gallery a:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+.galeria-thumb:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+.modal-content {
+    background-color: #000 !important;
+    border-radius: 0;
+    border: none;
+}
 
+.carousel-item img {
+    height: 80vh;
+    object-fit: contain;
+    background-color: #000;
+}
 
+/* Estilos responsivos para dispositivos grandes (hasta 1200px) */
+@media (max-width: 1200px) {
+    .gali {
+        font-size: 2.8rem;
+        margin-bottom: 50px;
+    }
+    
+    .carousel-item img {
+        height: 75vh;
+    }
+}
+
+/* Estilos responsivos para tablets (hasta 992px) */
+@media (max-width: 992px) {
+    .gali {
+        font-size: 2.5rem;
+        margin-bottom: 40px;
+    }
+    
+    .galeria-thumb {
+        height: 180px;
+    }
+    
+    .carousel-item img {
+        height: 70vh;
+    }
+}
+
+/* Estilos responsivos para tablets pequeñas y móviles grandes (hasta 768px) */
 @media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        align-items: center;
+    .gali {
+        font-size: 2.2rem;
+        margin-bottom: 30px;
     }
-
-    .nav-links {
-        flex-direction: column;
-        gap: 10px;
+    
+    .galeria-thumb {
+        height: 160px;
+        padding: 4px;
     }
-
-    .reserve-btn {
-        width: 100%;
-        margin-top: 10px;
+    
+    .galeria-thumb:hover {
+        transform: scale(1.02); /* Reducir la escala en móviles */
     }
-
-    .gallery-title {
-        font-size: 28px;
+    
+    .carousel-item img {
+        height: 60vh;
     }
-
+    
+    /* Ajustar el espaciado de la galería */
+    .gallery .row > div {
+        padding: 8px;
+    }
 }
 
-@media (max-width: 480px) {
-    .navbar {
-        padding: 10px;
+/* Estilos responsivos para móviles (hasta 576px) */
+@media (max-width: 576px) {
+    .gali {
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+        text-shadow: 0 0 10px #090a0a, 0 0 10px #B8860B;
     }
+    
+    .galeria-thumb {
+        height: 140px;
+        padding: 3px;
+        border-radius: 8px;
+    }
+    
+    .carousel-item img {
+        height: 50vh;
+    }
+    
+    /* Asegurar que las imágenes en dispositivos móviles se muestren correctamente */
+    .gallery .row > div {
+        padding: 5px;
+    }
+}
 
-    .gallery-title {
-        font-size: 24px;
+/* Estilos responsivos para móviles pequeños (hasta 400px) */
+@media (max-width: 400px) {
+    .gali {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+    
+    .galeria-thumb {
+        height: 120px;
+    }
+    
+    .carousel-item img {
+        height: 40vh;
     }
 }

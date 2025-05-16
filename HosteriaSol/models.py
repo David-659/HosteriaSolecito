@@ -19,43 +19,53 @@ class Usuario(models.Model):
     foto = models.ImageField(upload_to="usuarios", default="usuarios/default.png", max_length=254)
     telefono = models.IntegerField(null=True)
     direccion = models.CharField(max_length=254)
+    activo = models.BooleanField(default=False)
     ROLES = (
         (1, "Administrador"),
-        (2, "Empleado"),
-        (3, "Cliente"),
+        (2, "Cliente"),
+        (3, "Empleado"),
     )
-    rol = models.IntegerField(choices=ROLES, default=3)
+    rol = models.IntegerField(choices=ROLES, default=2)
 
     def __str__(self):
         return f"{self.nombre} - {self.tipo_documento} ROL: {self.rol}"
+    
+    class Meta:
+        ordering = ['-id']     
+      
 
 # Modelo de Servicio
 
 
 class Servicio(models.Model):
     nombre = models.CharField(max_length=254)
-    precio = models.DecimalField(max_digits=1000, decimal_places=0, default=0)  # ← Agregar default=0
+    precio = models.DecimalField(max_digits=1000, decimal_places=0, default=0)
     descripcion = models.TextField(blank=False, null=False)
     hora_inicio = models.TimeField(help_text="HH:mm")
     hora_fin = models.TimeField(help_text="HH:mm")
+    foto = models.ImageField(upload_to="servicios/", default="servicios/default.png", max_length=254)
     ESTADOS = (
-        (1, "Activo"),
-        (2, "Inactivo"),
+        ("A", "Activo"),
+        ("I", "Inactivo"),
     )
-    estado = models.IntegerField(choices=ESTADOS, default=1)
-    def __str__(self):
-        txt = '{0} - {1} - {2}'
-        return txt.format(self.nombre, self.precio, self.estado)
+    estado = models.CharField(max_length=1, choices=ESTADOS, default="A")
 
+    def __str__(self):
+        return f"{self.nombre} - {self.precio} - {self.estado}"
+
+    class Meta:
+        ordering = ['-id'] 
 
 # Modelo de Reserva
 class Reserva(models.Model):
     cliente = models.ForeignKey("Usuario", on_delete=models.CASCADE, related_name="fk04_idCliente", null=False, blank=False)
     empleado = models.ForeignKey('Empleado', on_delete=models.SET_NULL, null=True, blank=True, related_name="fk05_idEmpleado")
-    pago = models.ForeignKey('Pago', on_delete=models.SET_NULL, null=True, blank=True, related_name="fk06_idPago", default=1)
-    num_per = models.IntegerField(null=True, blank=True)
+    pago = models.ForeignKey('Pago', on_delete=models.SET_NULL, null=True, blank=True, related_name="fk06_idPago")
+    adultos = models.IntegerField(null=True, blank=True)
+    ninos = models.IntegerField(null=True, blank=True,default=0)
     fecha_inicio = models.DateField(help_text="AAAA-MM-DD", null=True, blank=True)
     fecha_fin = models.DateField(help_text="AAAA-MM-DD", null=True, blank=True)
+    
     ESTADOS = (
         ("A", "ACTIVA"),
         ("I", "INACTIVA"),
@@ -63,14 +73,19 @@ class Reserva(models.Model):
         ("P", "PAGADA"),
     )
     estado = models.CharField(max_length=1, choices=ESTADOS, default="A")
+    
     def __str__(self):
         txt = '{0} - {1} - {2}'
         return txt.format(self.cliente, self.empleado, self.estado)
 
+    class Meta:
+        ordering = ['-id']  
+   
+
 
 class Pago(models.Model):
     monto_total = models.DecimalField(max_digits=1000, decimal_places=0)
-    fecha_pago = models.DateTimeField(null=False)
+    fecha_pago = models.DateTimeField(null=True)
     METODOS =(
         (1,"EFECTIVO"),
         (2,"TRANSFERENCIA"),
@@ -85,7 +100,9 @@ class Pago(models.Model):
 class Empleado(models.Model):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
+    correo = models.EmailField(max_length=100)
+    password = models.CharField(max_length=100, null=True, blank=True)
+    foto = models.ImageField(upload_to="empleados", default="empleados/default.png", max_length=254)
     CARGOS = (
         ("Recepcionista", "RECEPCIONISTA"),
         ("Auxiliar_Aseo", "AUXILIAR_ASEO"),
@@ -96,7 +113,10 @@ class Empleado(models.Model):
     cargo = models.CharField(max_length=50, choices=CARGOS,default="Recepcionista")
 
     def __str__(self):
-        return f"{self.nombre} {self.apellido}  {self.email} - {self.cargo}"
+        return f"{self.nombre} {self.apellido}  {self.correo}  - {self.cargo}"
+    
+    class Meta:
+        ordering = ['-id'] 
 
 
 class Habitacion(models.Model):
@@ -114,6 +134,20 @@ class Habitacion(models.Model):
 
     def __str__(self):
         return f"{self.nombre} - Capacidad: {self.capacidad} - Estado: {self.estado}"
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'nombre': self.nombre,
+            'descripcion': self.descripcion, 
+            'precio': self.precio,
+            'capacidad': self.capacidad,
+            'estado': self.get_estado_display(),
+            'foto': self.foto.url,
+        }
+    
+    class Meta:
+        ordering = ['-id'] 
 
 
 class DetalleReserva(models.Model):
@@ -121,15 +155,9 @@ class DetalleReserva(models.Model):
     reserva = models.ForeignKey('Reserva', on_delete=models.CASCADE, related_name="fk01_idReserva")
     cantidad = models.IntegerField(null=True)
     precio_neto = models.DecimalField(max_digits=10, decimal_places=0)
+    servicio = models.ForeignKey('Servicio', on_delete=models.CASCADE, related_name="fk03_idServicio",null=True, blank=True)
 
     def __str__(self):
         return f"Reserva {self.reserva.id} - Habitación {self.habitacion.id} - Cantidad: {self.cantidad}"
 
 
-class DetalleServicio(models.Model):
-    servicio = models.ForeignKey('Servicio', on_delete=models.CASCADE, related_name="fk03_idServicio")
-    detalle_reserva = models.ForeignKey('DetalleReserva', on_delete=models.DO_NOTHING, related_name="fk07_idDetalleReserva")
-    cantidad = models.IntegerField(null=True)
-
-    def __str__(self):
-        return f"Servicio: {self.servicio} - Cantidad: {self.cantidad}"

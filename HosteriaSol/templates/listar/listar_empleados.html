@@ -1,0 +1,64 @@
+{% extends '-bases.html' %}
+{% load static %}
+{% block tittle %} Administrador {% endblock %}
+{% block style %} {% static 'css/admin.css' %} {% endblock %}
+{% block js %} {% static 'js/admin.js' %} {% endblock %}
+
+{% block cuerpo %}  
+<div class="container">
+    <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Tablas
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'Administrador' %}">Reservas</a></li>
+            <li><a class="dropdown-item" href="{% url 'listar_habitaciones' %}">Habitaciones</a></li>
+            <li><a class="dropdown-item" href="{% url 'listar_clientes' %}">Usuarios</a></li>
+            <li><a class="dropdown-item" href="{% url 'listar_servicios' %}">Servicios</a></li>
+            <li><a class="dropdown-item" href="{% url 'listar_empleados' %}">Empleados</a></li>
+    </div>
+
+
+    <a class="btn" href="{% url 'agregar_empleados' %}">agregar</a>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>nombre</th>
+                    <th>apellido</th>
+                    <th>correo</th>
+                    <th>foto</th>
+                    <th>cargo</th>
+                    <th>accion</th>
+                </tr>
+            </thead>
+            <tbody id="reservasTable">
+                {% if data %}
+                    {% for i in data %}
+                    <tr>
+                        <td>{{ i.id }}</td>
+                        <td>{{ i.nombre }}</td>
+                        <td>{{ i.apellido }}</td>
+                        <td>{{ i.correo }}</td>
+                        <td><img src="{{ i.foto.url }}" class="fotico"></td>
+                        <td>{{ i.get_cargo_display }}</td>
+                        <td>
+                            <a class="bot" href="javascript:confirmar_eliminar(`{% url 'eliminar_empleados' i.id %}`);">Eliminar</a>
+                            <a class="bot" href="{% url 'editar_empleados' i.id %}">Editar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="10" style="text-align: center;">No hay empleados aún...</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="{% static 'js/admin.js' %}"></script>
+{% endblock %}
+

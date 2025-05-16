@@ -28,13 +28,6 @@ function mostrarReservas() {
     });
 }
 
-function eliminarReserva(index) {
-    let reservas = JSON.parse(localStorage.getItem("reservas")) || [];
-    reservas.splice(index, 1);
-    localStorage.setItem("reservas", JSON.stringify(reservas));
-    mostrarReservas();
-}
-
 mostrarReservas();
 
 
@@ -42,5 +35,19 @@ function confirmar_eliminar(ruta){
     console.log(ruta);
     if(confirm("Está seguro? ")){
         location.href = ruta;
+    }
+}
+
+function validarArchivoImagen(input) {
+    const archivo = input.files[0];
+    const alertaError = document.getElementById('alertaError');
+    
+    if (archivo) {
+        if (!archivo.type.startsWith('image/')) {
+            alertaError.style.display = 'block';
+            input.value = '';
+        } else {
+            alertaError.style.display = 'none';
+        }
     }
 }

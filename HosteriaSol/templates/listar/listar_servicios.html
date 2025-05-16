@@ -1,0 +1,62 @@
+{% extends '-bases.html' %}
+{% load static %}
+{% block tittle %}Administrador - Servicios{% endblock %}
+{% block style %} {% static 'css/admin.css' %} {% endblock %}
+{% block cuerpo %}
+<div class="container">
+    <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Tablas
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'Administrador' %}">Reservas</a></li>
+            <li><a class="dropdown-item" href="{% url 'listar_habitaciones' %}">Habitaciones</a></li>
+            <li><a class="dropdown-item" href="{% url 'listar_clientes' %}">Usuarios</a></li>
+            <li><a class="dropdown-item" href="{% url 'listar_servicios' %}">Servicios</a></li>
+            <li><a class="dropdown-item" href="{% url 'listar_empleados' %}">Empleados</a></li>
+    </div>
+    
+    <a class="btn" href="{% url 'agregar_servicio' %}">Agregar</a>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Hora inicio</th>
+                    <th>Hora fin</th>
+                    <th>Estado</th>
+                    <th>Foto</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if data %}
+                    {% for servicio in data %}
+                    <tr>
+                        <td>{{ servicio.id }}</td>
+                        <td>{{ servicio.nombre }}</td>
+                        <td class="descripcion">{{ servicio.descripcion }}</td>
+                        <td>{{ servicio.precio }}</td>
+                        <td>{{ servicio.hora_inicio }}</td>
+                        <td>{{ servicio.hora_fin }}</td>
+                        <td>{{ servicio.get_estado_display }}</td>
+                        <td><img src="{{ servicio.foto.url }}" class="fotico"></td>
+                        <td>
+                            <a class="bot" href="javascript:confirmar_eliminar(`{% url 'eliminar_servicio' servicio.id %}`);">Eliminar</a>
+                            <a class="bot" href="{% url 'editar_servicio' servicio.id %}">Editar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr><td colspan="9">No hay servicios aún...</td></tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+<script src="{% static 'js/admin.js' %}"></script>
+{% endblock %}

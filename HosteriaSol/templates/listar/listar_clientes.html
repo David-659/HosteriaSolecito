@@ -14,11 +14,12 @@
             <li><a class="dropdown-item" href="{% url 'Administrador' %}">Reservas</a></li>
             <li><a class="dropdown-item" href="{% url 'listar_habitaciones' %}">Habitaciones</a></li>
             <li><a class="dropdown-item" href="{% url 'listar_clientes' %}">Usuarios</a></li>
-        </ul>
+            <li><a class="dropdown-item" href="{% url 'listar_servicios' %}">Servicios</a></li>
+            <li><a class="dropdown-item" href="{% url 'listar_empleados' %}">Empleados</a></li>
     </div>
 
-    <h3>Clientes</h3>
 
+    <a class="btn" href="{% url 'agregar_registro' %}">agregar</a>
     <div class="table-container">
         <table>
             <thead>
@@ -49,8 +50,10 @@
                         <td>{{ i.direccion }}</td>
                         <td>{{ i.get_rol_display }}</td>
                         <td>
-                            <a class="btn" href="javascript:confirmar_eliminar(`{% url 'eliminar_usuario' i.id %}`);">Eliminar</a>
-                            <a class="btn" href="{% url 'editar_registro' i.id %}">Editar</a>
+                            <a class="bot" href="javascript:confirmar_eliminar(`{% url 'eliminar_usuario' i.id %}`);">Eliminar</a>
+                            {% if i.rol != 3 %}
+                                <a class="bot" href="{% url 'editar_registro' i.id %}">Editar</a>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}

@@ -4,89 +4,207 @@
 {% block style %} {% static 'css/Reservas.css' %} {% endblock %}
 {% block js %} {% static 'js/Reservas.js' %} {% endblock %}
 {% block cuerpo %}
-<form action="{% if datos %}{% url 'editar_reserva' datos.id %}{% else %}{% url 'agregar_reservas' %}{% endif %}" method="post">
-  {% csrf_token %}
-  {% if tiene_reserva %}
-    <button type="button" class="btn btn-primary position-relative">
-      Reservas
-      <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
-        <span class="visually-hidden">New alerts</span>
-      </span>
-    </button>
-  {% else %}
-    <button type="button" class="btn btn-primary">Reservas</button>
-  {% endif %}
-    <div class="container">
-      <h1>Reservar Fechas</h1>
-      <div class="calendar">
-          <div class="month">
-              <button><a class="mu" href="javascript:prevMonth()">&lt;</a></button>
-              <span id="month-label"></span>
-              <button><a class="mu" href="javascript:nextMonth()">&gt;</a></button>
-          </div>
-          <div class="weekdays">
-              <div>Dom</div>
-              <div>Lun</div>
-              <div>Mar</div>
-              <div>Mié</div>
-              <div>Jue</div>
-              <div>Vie</div>
-              <div>Sáb</div>
-          </div>
-          <div class="days"></div>
-      </div>
-
-      <div class="error-message"></div>
-      <div class="success-message"></div>
-
-      <button id="reserve-button" disabled><a class="mu" href="javascript:reserve()">Reservar</a></button>
-        
-        <a href="{% url 'index' %}" class="back-button">Volver al Menú</a>
-    </div><br><br><br><br><br><br>
-  <center>
-    <div id="contenido_oculto">
-          <h3>Detalles de la Reserva</h3>
-          <div class="contenedor-select">
-              <label for="tipo-habitacion">Tipo de Habitación:</label>
-              <select id="tipo-habitacion" name="habitacion">
-                {% for habitacion in disponibles %}
-                  <option value="{{ habitacion.id }}"> {{ habitacion.nombre }}</option>
-                {% endfor %}
-              </select>
-          </div>
-          <div class="cards-container">
-            {% for habitacion in habitaciones %}
-              <div class="card" data-id="{{ habitacion.id }}" style="display: none;">
-                <img src="{{ habitacion.foto.url }}">
-                <div class="info">
-                  <h2>{{ habitacion.nombre }}</h2>
-                  <p>{{ habitacion.descripcion }}</p>
-                  <p>Capacidad: {{ habitacion.capacidad }}</p>
-                  <p class="precio">Precio: ${{ habitacion.precio }}</p>
-                </div>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<div class="container main-container">
+  <div class="row justify-content-center">
+      <div class="col-lg-10">
+          <div class="reservation-container">
+              <h2 class="section-heading text-center mb-4">¡Reserva al mejor precio garantizado!</h2>
+              
+              <div class="row">
+                  <!-- Formulario de Reserva -->
+                  <div class="col-md-{% if datos %}12{% else %}8{% endif %}">
+                      <form action="{% if datos %}{% url 'editar_reserva' datos.id %}{% else %}{% url 'agregar_reservas' %}{% endif %}" method="POST" class="row g-4">
+                          {% csrf_token %}
+                          <!-- Fechas de Reserva -->
+                          <div class="col-md-6">
+                              <div class="form-section">
+                                  <h4 class="mb-3 text-white"><i class="fas fa-calendar-alt me-2"></i>Fechas de reserva *</h4>
+                                  <div class="mb-3">
+                                      <label for="fechas" class="form-label">Seleccione entrada y salida</label>
+                                      <div class="input-group">
+                                          <span class="input-group-text bg-transparent border-0">
+                                              <i class="fas fa-calendar text-white"></i>
+                                          </span>
+                                          <input value="{% if datos %}{{ dat_fechas }}{% else %}{{ fechas }}{% endif %}" type="text" class="form-control" id="fechas" name="fechas" placeholder="Selecciona fechas" required>
+                                      </div>
+                                      <div id="estancia" class="mt-2 text-white fst-italic"></div>
+                                  </div>
+                              </div>
+                          </div>
+                          
+                          <!-- Ocupación -->
+                          <div class="col-md-6">
+                              <div class="form-section">
+                                  <h4 class="mb-3 text-white"><i class="fas fa-users me-2"></i>Ocupación</h4>
+                                  
+                                  <div class="mb-3">
+                                      <label for="cantidad" class="form-label">Total de habitaciones</label>
+                                      <select name="cantidad" class="form-select" id="cantidad">
+                                          <option value="1"{% if datos %}{% if total_habitaciones == 1 %}selected=""{% endif %}{% else %}selected=""{% endif %}>1</option>
+                                          <option value="2"{% if datos %}{% if total_habitaciones == 2 %}selected=""{% endif %}{% endif %}>2</option>
+                                          <option value="3"{% if datos %}{% if total_habitaciones == 3 %}selected=""{% endif %}{% endif %}>3</option>
+                                          <option value="4"{% if datos %}{% if total_habitaciones == 4 %}selected=""{% endif %}{% endif %}>4</option>
+                                          <option value="5"{% if datos %}{% if total_habitaciones == 5 %}selected=""{% endif %}{% endif %}>5</option>
+                                      </select>
+                                  </div>
+                                  
+                                  <div class="mb-3">
+                                      <label class="form-label">Adultos *</label>
+                                      <div class="counter-control">
+                                          <button type="button" class="counter-btn" onclick="changeCount('adultos', -1)">   
+                                              <i class="fas fa-minus"></i>
+                                          </button>
+                                          <input {% if datos %}value="{{ datos.adultos }}"{% else %}value="0"{% endif %} type="text" class="counter-input" id="adultos" name="adultos" readonly>
+                                          <button type="button" class="counter-btn" onclick="changeCount('adultos', 1)">
+                                              <i class="fas fa-plus"></i>
+                                          </button>
+                                      </div>
+                                  </div>
+                                  
+                                  <div class="mb-3">
+                                      <label class="form-label">Niños</label>
+                                      <div class="counter-control">
+                                          <button type="button" class="counter-btn" onclick="changeCount('ninos', -1)">
+                                              <i class="fas fa-minus"></i>
+                                          </button>
+                                          <input {% if datos %}value="{{ datos.ninos }}"{% else %}value="0"{% endif %} type="text" class="counter-input" id="ninos" name="ninos" readonly>
+                                          <button type="button" class="counter-btn" onclick="changeCount('ninos', 1)">
+                                              <i class="fas fa-plus"></i>
+                                          </button>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          
+                          <!-- Servicios Adicionales -->
+                          <div class="col-12">
+                              <div class="form-section">
+                                  <h4 class="mb-3 text-white"><i class="fas fa-concierge-bell me-2"></i>Servicio adicional</h4>
+                                  <div class="mb-3">
+                                      <label for="servicio_id" class="form-label">Seleccione servicio (opcional)</label>
+                                      <a class ="wtie" href="{% url 'Servicios' %}">ver detalles</a>
+                                      <p class ="wtie">Si quieres algo en especial puedes hacerlo despues en peticiones.</p>
+                                      <select name="servicio_id" class="form-select" id="servicio_id">
+                                          <option value="">Ninguno - Sin cargo adicional</option>
+                                          {% for servicio in servicios %}
+                                              <option value="{{ servicio.id }}" 
+                                              {% for d in servi %}
+                                              {% if servicio.id == d.servicio.id %}
+                                                  selected
+                                              {% endif %}
+                                          {% endfor %}>{{ servicio.nombre }} - ${{ servicio.precio }} </option>
+                                          {% endfor %}
+                                      </select>
+                                  </div>
+                              </div>
+                          </div>
+                          
+                          <input type="hidden" name="cliente" value="{{ request.session.auth.id }}">
+                          
+                          <!-- Botón de Reserva -->
+                          <div class="col-12 text-center mt-4">
+                              <button type="submit" class="btn btn-primary btn-lg">
+                                  <i class="fas fa-check-circle me-2"></i>Buscar Habitación
+                              </button>
+                          </div>
+                      </form>
+                  </div>
+                  
+                  <!-- Historial de Reservas -->
+                  {% if datos %}{% else %}
+                  <div class="col-md-4">
+                      <div class="card h-100 reservation-list">
+                          <div class="card-header bg-white py-3">
+                              <h4 class="mb-0 text-primary">
+                                  <i class="fas fa-history me-2"></i>Mis Reservas
+                                  {% if reserva_existente %}
+                                  <span class="badge rounded-pill bg-primary badge-notification">{{ reserva_existente|length }}</span>
+                                  {% endif %}
+                              </h4>
+                          </div>
+                          
+                          <div class="card-body p-0 ">
+                              {% if reserva_existente %}
+                                  <div class="accordion" id="reservasAccordion">
+                                      {% for reserva in reserva_existente %}
+                                          <div class="reservation-item">
+                                              <button class="reservation-date-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReserva{{ reserva.id }}" aria-expanded="false">
+                                                  <span>
+                                                      <i class="fas fa-calendar-check me-2 text-success"></i>
+                                                      {{ reserva.fecha_inicio }} - {{ reserva.fecha_fin }}
+                                                  </span>
+                                                  <i class="fas fa-chevron-down"></i>
+                                              </button>
+                                              <div id="collapseReserva{{ reserva.id }}" class="collapse" data-bs-parent="#reservasAccordion">
+                                                  <div class="reservation-details">
+                                                      <div class="detail-item">
+                                                          <strong>Empleado:</strong>
+                                                          <span>{{ reserva.empleado.nombre }}</span>
+                                                      </div>
+                                                      <div class="detail-item">
+                                                          <strong>Entrada:</strong>
+                                                          <span>{{ reserva.fecha_inicio }}</span>
+                                                      </div>
+                                                      <div class="detail-item">
+                                                          <strong>Salida:</strong>
+                                                          <span>{{ reserva.fecha_fin }}</span>
+                                                      </div>
+                                                      <div class="detail-item">
+                                                          <strong>Personas:</strong>
+                                                          <span>{{ reserva.num_p }}</span>
+                                                      </div>
+                                                      <div class="detail-item">
+                                                        <strong>Estado:</strong>
+                                                        <span>{{ reserva.get_estado_display }}</span>
+                                                      </div>
+                                                      <div class="detail-item">
+                                                        <strong>Total habitaciones:</strong>
+                                                        <span>{{ reserva.total_habitaciones }}</span>
+                                                      </div>
+                                                        <div class="detail-item fw-bold">
+                                                            <strong>Total:</strong>
+                                                            <span class="text-primary">COP {{ reserva.pago }}</span>
+                                                        </div>
+                                                        
+                                                        <div class="action-buttons">
+                                                            {% if reserva.estado == "C" %}
+                                                                <a href="javascript:confirmar_eliminar(`{% url 'eliminar_reserva' reserva.id %}`);" class="btn btn-sm btn-outline-danger w-50">
+                                                                    <i class="fas fa-times-circle me-1"></i>Eliminar
+                                                                </a>
+                                                            {% else %}
+                                                                <a href="javascript:confirmar_eliminar(`{% url 'cancelar_reserva' reserva.id %}`);" class="btn btn-sm btn-outline-danger w-50">
+                                                                    <i class="fas fa-times-circle me-1"></i>Cancelar
+                                                                </a>
+                                                            {% endif %}
+                                                            <a href="{% url 'editar_reserva' reserva.id %}" class="btn btn-sm btn-outline-success w-50">
+                                                                <i class="fas fa-edit me-1"></i>Editar
+                                                            </a>
+                                                        </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      {% endfor %}
+                                  </div>
+                              {% else %}
+                                  <div class="text-center py-5">
+                                      <i class="fas fa-calendar-xmark fa-3x mb-3 text-muted"></i>
+                                      <p class="mb-0 text-muted">No tienes reservas activas</p>
+                                  </div>
+                              {% endif %}
+                          </div>
+                      </div>
+                  </div>
+                  {% endif %}
               </div>
-              {% endfor %}
-            </div>
-          <label for="num-per">Número de Personas:</label>
-          <select id="num-per" name="num_per">
-            <option value="1" {% if datos and datos.num_per == 1 %}selected{% endif %}>1</option>
-            <option value="2" {% if datos and datos.num_per == 2 %}selected{% endif %}>2</option>
-            <option value="3" {% if datos and datos.num_per == 3 %}selected{% endif %}>3</option>
-            <option value="4" {% if datos and datos.num_per == 4 %}selected{% endif %}>4</option>
-            <option value="5" {% if datos and datos.num_per == 5 %}selected{% endif %}>5</option>
-            <option value="6" {% if datos and datos.num_per == 6 %}selected{% endif %}>6</option>
-            <option value="Mas" {% if datos and datos.num_per == "Mas" %}selected{% endif %}>Más</option>
-          </select>
-          <br>
-          <input type="hidden" name="cliente" value="{{ request.session.auth.id }}"><br>
-          <input type="hidden" name="empleado" value="">
-          <br><br>
-          <input type="hidden" id="startInput" name="inicio" value="">
-          <input type="hidden" id="endInput" name="fin" value="">
-
-          <button type="submit">{% if datos %}Actualizar{% else %}Guardar{% endif %}</button>
-          <button><a class="mu" href="javascript:closeModal()">Cancelar</a></button>
-    </div>
-  </center>
-</form>   
+              
+          </div>
+      </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
 {% endblock %}

@@ -1,23 +1,17 @@
-body {
-    background-image: url('https://png.pngtree.com/background/20231030/original/pngtree-nature-inspired-3d-render-of-a-tranquil-hotel-interior-picture-image_5796947.jpg');
-    color: #fff;
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
 .nosotros-main {
     padding: 2rem;
     max-width: 1200px;
     margin: auto;
 }
 
-.title {
+.equipo {
+    color: #f5f5f5;
+    text-shadow: 0 0 15px #090a0a, 0 0 15px #B8860B;
+    font-weight: bold;
+    font-size: 3rem;
     text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-    color: #ffd700; /* dorado */
-    text-shadow: 1px 1px 2px black;
+    font-family: 'Playfair Display', Georgia, serif;
+    margin-bottom: 60px;
 }
 
 .equipo-container {
@@ -49,11 +43,11 @@ body {
     object-fit: cover;
     border-radius: 50%;
     margin-bottom: 1rem;
-    border: 3px solid #ffd700;
+    border: 3px solid #B8860B;
 }
 
 .card h2 {
-    color: #ffd700;
+    color: #B8860B;
     font-weight: bold;
 }
 
@@ -108,7 +102,7 @@ form#contactForm button {
     padding: 0.9rem;
     border: none;
     border-radius: 8px;
-    background-color: #ffd700;
+    background-color: #B8860B;
     color: #000;
     font-weight: bold;
     cursor: pointer;
@@ -116,5 +110,49 @@ form#contactForm button {
 }
 
 form#contactForm button:hover {
-    background-color: #e6c200;
+    background-color: #B8860B;
+}
+
+/* -------------------- Responsive -------------------- */
+
+@media (max-width: 768px) {
+    .equipo {
+        font-size: 2.2rem;
+        margin-bottom: 40px;
+    }
+
+    .card {
+        width: 90%;
+        padding: 1.2rem;
+    }
+
+    .form-section {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .equipo {
+        font-size: 1.8rem;
+    }
+
+    .card img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .form-section h2 {
+        font-size: 1.4rem;
+    }
+
+    form#contactForm input,
+    form#contactForm textarea {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+    }
+
+    form#contactForm button {
+        padding: 0.8rem;
+        font-size: 0.95rem;
+    }
 }

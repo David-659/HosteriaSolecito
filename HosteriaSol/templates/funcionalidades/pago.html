@@ -4,36 +4,173 @@
 {% block style %} {% static 'css/Register.css' %} {% endblock %}
 {% block js %} {% static 'js/pago.js' %} {% endblock %}
 {% block cuerpo %}
-<body>
-    <form  action="{% url 'pago' reserva.id %}" method="post" class="register-form">
-        {% csrf_token %}
-        <div class="register-container">
-            <h2>Registrar Pago</h2>
-            <div class="input-group">
-                <label for="monto_total">Monto Total:</label>
-                <input type="number" name="monto_total" id="monto_total" placeholder="Introduce tu monto a pagar" required>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+<div class="container booking-container">
+    <div class="row g-4">
+        <!-- Formulario de Reserva -->
+        <div class="col-lg-8">
+            <div class="row g-4">
+                <!-- Datos del Huésped -->
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body p-4">
+                            <h4 class="card-title">
+                                <i class="fas fa-user me-2"></i>Datos del Huésped
+                            </h4>
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre completo *</label>
+                                <input value="{{request.session.auth.nombre}}" type="text" class="form-control" id="nombre" name="nombre" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email *</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                    <input value="{{request.session.auth.correo}}" type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="telefono" class="form-label">Teléfono *</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">+57 (CO)</span>
+                                    <input value="{{request.session.auth.telefono}}" type="number" class="form-control" id="telefono" name="telefono" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="peticion" class="form-label">¿Tienes alguna petición especial?</label>
+                                <textarea class="form-control" name="peticion" id="peticion" rows="3" placeholder="Escribe aquí tus necesidades específicas..."></textarea>
+                                <small class="text-muted fst-italic">Preferencias de alojamiento, hora de entrada/salida especiales, alergias...</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Datos de Pago -->
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body p-4">
+                            <h4 class="card-title">
+                                <i class="fas fa-credit-card me-2"></i>Datos de Pago
+                            </h4>
+                            <div class="payment-icons d-flex align-items-center mb-3">
+                                <img src="https://aerolatinnews.com/wp-content/uploads/2017/11/visa.png" alt="Visa">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg" alt="Mastercard">
+                            </div>
+                            <div class="mb-3">
+                                <label for="tarjeta" class="form-label">Número de tarjeta *</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-credit-card"></i></span>
+                                    <input type="number" class="form-control" id="tarjeta" placeholder="XXXX XXXX XXXX XXXX" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="titular" class="form-label">Titular de la tarjeta *</label>
+                                <input type="text" class="form-control" id="titular" placeholder="Nombre como aparece en la tarjeta" required>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="caducidad" class="form-label">Fecha de caducidad *</label>
+                                    <input type="text" class="form-control" id="caducidad" placeholder="MM/AA" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="d-flex align-items-center">
+                                        <label for="cvc" class="form-label me-2">CVC/CVV *</label>
+                                        <i class="fas fa-question-circle" data-bs-toggle="tooltip" title="Código de seguridad de 3 dígitos en el reverso de tu tarjeta"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="cvc" placeholder="XXX" required>
+                                </div>
+                            </div>
+
+                            <div class="secure-badge">
+                                <i class="fas fa-lock me-2"></i>
+                                <strong>Pago 100% seguro</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Términos y Condiciones -->
+                    <div class="card mb-4">
+                        <div class="card-body p-4">
+                            <h4 class="card-title">
+                                <i class="fas fa-file-contract me-2"></i>Términos
+                            </h4>
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="condiciones" required>
+                                    <label class="form-check-label" for="condiciones">
+                                        He leído y acepto las <a href="#" class="text-decoration-none fw-medium">condiciones de compra</a> y la <a href="#" class="text-decoration-none fw-medium">política de privacidad</a> *
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="promociones">
+                                    <label class="form-check-label" for="promociones">
+                                        Doy mi consentimiento para recibir promociones y ofertas exclusivas. Consulte la <a href="#" class="text-decoration-none fw-medium">política de privacidad</a>.
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <br>
-            <div class="input-group">
-                <label>Fecha y Hora Cita:</label>
-                <input value="{{datos.fecha_cita|date:'Y-m-d H:s'}}" type="datetime-local" name="fecha_pago" placeholder="Introduce la fecha y hora"/>
-            </div>
-            <br>
-            <div class="input-group">
-                <label>Método de Pago:</label>
-                <select name="metodo_pago" id="metodo_pago" >
-                    <option value="">Seleccione</option>
-                    <option value="EFECTIVO">Efectivo</option>
-                    <option value="TRANSFERENCIA">Transferencia</option>
-                    <option value="DATAFONO">Datáfono</option>
-                    
-                </select>
-            </div>
-            <br>
-            
-            <button type="submit"  onclick="ponerFechaHora()" class="btn-register">Registrar Pago </button>
         </div>
-    </form>
-</body>
-       
+
+        <!-- Resumen de la Reserva -->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body p-4">
+                    <h4 class="card-title text-center">
+                        <i class="fas fa-receipt me-2"></i>Detalles de la Reserva
+                    </h4>
+                    
+                    <div class="mb-4">
+                        <img src="{{ habitacion.foto.url }}" class="img-fluid rounded mb-3 w-100" alt="Habitación">
+                        <h5 class="fw-bold">{{ habitacion.nombre }}</h5>
+                        <p class="text-muted">Disfrute de una estancia confortable en nuestra habitación premium con todas las comodidades.</p>
+                    </div>
+
+                    <div class="booking-summary">
+                        <div class="summary-item">
+                            <span><i class="fas fa-calendar-check me-2"></i>Fecha de entrada:</span>
+                            <span class="fw-medium">{{ fecha_entrada }}</span>
+                        </div>
+                        <div class="summary-item">
+                            <span><i class="fas fa-calendar-times me-2"></i>Fecha de salida:</span>
+                            <span class="fw-medium">{{ fecha_salida }}</span>
+                        </div>
+                        <div class="summary-item">
+                            <span><i class="fas fa-users me-2"></i>Total personas:</span>
+                            <span class="fw-medium">{{ numero_personas }}</span>
+                        </div>
+                        <div class="summary-item">
+                            <span><i class="fas fa-bed me-2"></i>Precio habitación:</span>
+                            <span class="fw-medium">COP {{ precio_habi }}</span>
+                        </div>
+                        {% if precio_total %}
+                        <div class="summary-item">
+                            <span><i class="fas fa-money-bill-wave me-2"></i>Precio total:</span>
+                            <span class="price-tag">COP {{ precio_total }}</span>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <form method="POST" action="{% url 'confirmar_pago' %}" class="mt-4">
+                        {% csrf_token %}
+                        <input type="hidden" name="reserva_id" value="{{ reserva.id }}">
+                        <input type="hidden" name="habitacion_id" value="{{ habitacion.id }}">
+                        <input type="hidden" name="servicio_id" value="{{ servicio.id }}">
+                        <input type="hidden" name="fecha_entrada" value="{{ fecha_entrada|date:'Y-m-d' }}">
+                        <input type="hidden" name="fecha_salida" value="{{ fecha_salida|date:'Y-m-d' }}">
+                        <input type="hidden" name="adultos" value="{{ num_per }}">
+                        <input type="hidden" name="precio_total" value="{{ precio_total }}">
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fas fa-check-circle me-2"></i>Finalizar Reserva
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

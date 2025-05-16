@@ -2,7 +2,7 @@
 {% load static %}
 {% block tittle %} Administrador {% endblock %}
 {% block style %} {% static 'css/admin.css' %} {% endblock %}
-{% block js %} {% static 'js/admin.js' %} {% endblock %}
+{% block js %} {% static 'js/habitaciones.js' %} {% endblock %}
 {% block cuerpo %}  
 <div class="container">
     <div class="dropdown">
@@ -13,10 +13,12 @@
             <li><a class="dropdown-item" href="{% url 'Administrador' %}">Reservas</a></li>
             <li><a class="dropdown-item" href="{% url 'listar_habitaciones' %}">Habitaciones</a></li>
             <li><a class="dropdown-item" href="{% url 'listar_clientes' %}">Usuarios</a></li>
+            <li><a class="dropdown-item" href="{% url 'listar_servicios' %}">Servicios</a></li>
+            <li><a class="dropdown-item" href="{% url 'listar_empleados' %}">Empleados</a></li>
+            
         </ul>
     </div>
 
-    <h3>Habitaciones</h3>
     
     <a class="btn" href="{% url 'habitacion' %}">agregar</a>
     <div class="table-container">
@@ -46,8 +48,8 @@
                         <td>{{ i.precio }}</td>
                         <td>{{ i.get_estado_display }}</td>
                         <td>
-                            <a class="btn" href="javascript:confirmar_eliminar(`{% url 'eliminar_habitacion' i.id %}`);">Eliminar</a>
-                            <a class="btn" href="{% url 'editar_habitacion' i.id %}">Editar</a>
+                            <a class="bot" href="javascript:confirmar_eliminar(`{% url 'eliminar_habitacion' i.id %}`);">Eliminar</a>
+                            <a class="bot" href="{% url 'editar_habitacion' i.id %}">Editar</a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -59,6 +61,7 @@
         </table>
     </div>
 </div>
+
 <script src="{% static 'js/admin.js' %}"></script>
     
 {% endblock %}

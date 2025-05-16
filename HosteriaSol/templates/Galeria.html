@@ -2,47 +2,48 @@
 {% load static %}
 {% block tittle %} Galeria {% endblock %}
 {% block style %} {% static 'css/Galeria.css' %} {% endblock %}
+{% block js %} {% static 'js/Galeria.js' %} {% endblock %}
 {% block cuerpo %}
-    <main>
-        <h1 class="gallery-title">Explora Nuestra Galería</h1>
-        <section class="gallery">
-            <a href="{% static 'img/imag/64501219.jpg' %} " target="_blank">
-                <img src="{% static 'img/imag/64501219.jpg' %}" alt="Vista de la Hostería">
-            </a>
-            <a href="{% static 'img/imag/Delux.jpg' %}" target="_blank">
-                <img src="{% static 'img/imag/Delux.jpg' %}" alt="Habitación Deluxe">
-            </a>
-            <a href="{% static 'img/imag/caption.jpg' %}" target="_blank">
-                <img src="{% static 'img/imag/caption.jpg' %}" alt="Piscina al aire libre">
-            </a>
-            <a href="{% static 'img/imag/caption (1).jpg' %}" target="_blank">
-                <img src="{% static 'img/imag/caption (1).jpg' %}" alt="Área de descanso">
-            </a>
-            <a href="{% static 'img/imag/hosteria-florida-tropical.jpg' %}" target="_blank">
-                <img src="{% static 'img/imag/hosteria-florida-tropical.jpg' %}"  alt="Comedor con vista">
-            </a>
-            <a href="{% static 'img/imag/el-paraiso.jpg' %}" target="_blank">
-                <img src="{% static 'img/imag/el-paraiso.jpg' %}" alt="Jardines">
-            </a>
-            <a href="{% static 'img/imag/IMG_4580.avif' %}" target="_blank">
-                <img src="{% static 'img/imag/IMG_4580.avif' %}" alt="juegos">
-            </a>
-            <a href="{% static 'img/imag/restaurante.avif' %}" target="_blank">
-                <img src="{% static 'img/imag/restaurante.avif' %}" alt="juegos">
-            </a>
-            <a href="{% static 'img/imag/jiji.jpg' %}" target="_blank">
-                <img src="{% static 'img/imag/jiji.jpg' %}" alt="juegos">
-            </a>
-            <a href="{% static 'img/imag/sala.avif' %}" target="_blank">
-                <img src="{% static 'img/imag/sala.avif' %}" alt="juegos">
-            </a>
-            <a href="{% static 'img/imag/juegos.jpg' %}" target="_blank">
-                <img src="{% static 'img/imag/juegos.jpg' %}" alt="juegos">
-            </a>
-            <a href="{% static 'img/imag/natu.jpg' %}" target="_blank">
-                <img src="{% static 'img/imag/natu.jpg' %}" alt="juegos">
-            </a>
-        </section>
-    </main>
+<main>
+    <h1 class="gali">NUESTRA GALERIA</h1>
     
-{% endblock %} 
+    <section class="gallery container my-4">
+        <div class="row g-3">
+            {% for i in imagenes %}
+            <div class="col-6 col-md-4 col-lg-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#galeriaModal" data-bs-slide-to="{{ forloop.counter0 }}">
+                    <img src="{% static i %}" class="img-fluid rounded galeria-thumb" alt="Imagen galería">
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+
+<!-- Modal Carrusel -->
+<div class="modal fade" id="galeriaModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content bg-dark border-0">
+      <div class="modal-body p-0">
+        <div id="carouselGaleria" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            {% for i in imagenes %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              <img src="{% static i %}" class="d-block w-100" alt="Imagen galería">
+            </div>
+            {% endfor %}
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselGaleria" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselGaleria" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+

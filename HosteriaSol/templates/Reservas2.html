@@ -1,0 +1,177 @@
+{% extends '-bases.html' %}
+{% load static %}
+{% block tittle %} inicio {% endblock %}
+{% block style %} {% static 'css/Reservas.css' %} {% endblock %}
+{% block js %} {% static 'js/Reservas.js' %} {% endblock %}
+{% block cuerpo %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+<div class="titul text-center">
+    <h2>Seleccione una habitación</h2>
+    <div class="cart-container">
+        <div class="dropdown">
+            {% if seleccionadas %}
+                <button class="btn btn-primary dropdown-toggle cart-with-items" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-bed"></i>
+                    <span class="badge bg-danger cart-badge">{{ seleccionadas|length }}</span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <h6 class="dropdown-header">Habitaciones seleccionadas</h6>
+                    <div class="dropdown-divider"></div>
+                    {% for habitacion in seleccionadas %}
+                        <div class="habitacion-item">
+                            <span>{{ habitacion.nombre }}</span>
+                            {% if servicio_id %}
+                                <a href="{% url 'eliminar_seleccion_servicio' habitacion.id reserva.id servicio_id %}">
+                            {% else %}
+                                <a href="{% url 'eliminar_seleccion' habitacion.id reserva.id %}">
+                            {% endif %}
+                                <button class="btn btn-sm btn-outline-danger">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </a>
+                        </div>
+                    {% endfor %}
+                    <div class="dropdown-divider"></div>
+                </div>
+            {% else %}
+                <button class="btn btn-secondary dropdown-toggle cart-empty" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-bed"></i>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <div class="empty-cart-text">
+                        <i class="fas fa-bed"></i>
+                        <p>No hay habitaciones seleccionadas</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="habitaciones-lista conte">
+    <div class="row"> 
+        {% if seleccionadas|length == cantidad %}
+            <center><h2>Ya puedes continuar</h2></center>
+            {% for habitacion in seleccionadas %}
+                <div class="col-md-6">
+                    <div class="card mb-3" style="max-width: 700px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <div style="position: relative; height: 260px; overflow: hidden;">
+                                    <img src="{{ habitacion.foto }}" class="img-fluid rounded-start" alt="{{ habitacion.nombre }}" style="object-fit: cover; width: 100%; height: 100%;">
+                                    <div class="ofer">
+                                        ★ Oferta especial
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ habitacion.nombre }}<span class="text-warning">★★★</span></h5>
+                                    <p class="card-text">{{ habitacion.descripcion }}</p>
+                                    <div>
+                                        <i class="bi bi-cup"></i>
+                                        <i class="bi bi-person"></i>
+                                        <i class="bi bi-signpost"></i>
+                                        <i class="bi bi-paw"></i>
+                                        <i class="bi bi-parking"></i>
+                                        <i class="bi bi-emoji-smile"></i>
+                                        <i class="bi bi-water"></i>
+                                        <i class="bi bi-clock"></i>
+                                        <i class="bi bi-chef-hat"></i>
+                                        <i class="bi bi-shop"></i>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h4 class="card-text">{{ habitacion.precio }}</h4>
+                                            <small class="text-muted">capacidad: {{ habitacion.capacidad }}</small>
+                                            <p>Estado: {{ habitacion.estado }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            {% if cantidad > 1 %}
+                <center><h2><strong>{{cantidad}}</strong> habitaciones a seleccionar:</h2></center>
+            {% endif %}
+            {% for habitacion in request.session.datos_reserva.disponibles %}
+            <div class="col-md-6">
+                <div class="card mb-3" style="max-width: 700px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <div style="position: relative; height: 260px; overflow: hidden;">
+                                <img src="{{ habitacion.foto }}" class="img-fluid rounded-start" alt="{{ habitacion.nombre }}" style="object-fit: cover; width: 100%; height: 100%;">
+                                <div class="ofer">
+                                    ★ Oferta especial
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ habitacion.nombre }}<span class="text-warning">★★★</span></h5>
+                                <p class="card-text">{{ habitacion.descripcion }}</p>
+                                <div>
+                                    <i class="bi bi-cup"></i>
+                                    <i class="bi bi-person"></i>
+                                    <i class="bi bi-signpost"></i>
+                                    <i class="bi bi-paw"></i>
+                                    <i class="bi bi-parking"></i>
+                                    <i class="bi bi-emoji-smile"></i>
+                                    <i class="bi bi-water"></i>
+                                    <i class="bi bi-clock"></i>
+                                    <i class="bi bi-chef-hat"></i>
+                                    <i class="bi bi-shop"></i>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h4 class="card-text">{{ habitacion.precio }}</h4>
+                                        <small class="text-muted">capacidad: {{ habitacion.capacidad }}</small>
+                                        <p>Estado: {{ habitacion.estado }}</p>
+                                    </div>
+                                        {% if cantidad > 1 %}
+                                            {% if servicio_id %}
+                                            <form method="POST" action="{% url 'seleccion_habitacion_servicio' habitacion.id reserva.id servicio_id %}">
+                                            {% else %}
+                                            <form method="POST" action="{% url 'seleccion_habitacion' habitacion.id reserva.id %}">
+                                            {% endif %}
+                                                {% csrf_token %}
+                                                    <button type="submit">agregar</button>
+                                            </form>
+                                        {% else %}
+                                            {% if servicio_id %}
+                                            <form method="POST" {% if datos %}action="{% url 'detalles' reserva.id habitacion.id servicio_id %}"{% else %}action="{% url 'pago' reserva.id habitacion.id servicio_id %}"{% endif %}>
+                                            {% else %}
+                                            <form method="POST" {% if datos %}action="{% url 'detalles_sin_servicio' reserva.id habitacion.id %}"{% else %}action="{% url 'pago_sin_servicio' reserva.id habitacion.id %}"{% endif %}>
+                                            {% endif %}
+                                                {% csrf_token %}
+                                                <button type="submit">Seleccionar</button>
+                                        {% endif %}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% if seleccionadas|length == cantidad %}
+            {% if servicio_id %}
+                <form method="POST" {% if datos %}action="{% url 'detalles' reserva.id 0 servicio_id %}"{% else %}action="{% url 'pago' reserva.id 0 servicio_id %}"{% endif %}>
+            {% else %}
+                <form method="POST" {% if datos %}action="{% url 'detalles_sin_servicio' reserva.id 0 %}"{% else %}action="{% url 'pago_sin_servicio' reserva.id 0 %}"{% endif %}>
+            {% endif %}
+                {% csrf_token %}
+                    <div class="d-flex justify-content-center my-3">
+                        <button class="btn btn-primary btn-lg px-5">
+                            Confirmar reserva
+                        </button>
+                    </div>
+            </form>
+        {% endif %}
+    </div>  
+</div>
+{% endblock %}
